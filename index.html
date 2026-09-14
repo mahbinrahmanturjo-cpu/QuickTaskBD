@@ -3,484 +3,405 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>QuickTask BD | Affordable Digital Services in Bangladesh</title>
 
   <meta name="description" content="QuickTask BD is a digital service platform in Bangladesh offering affordable logo design, poster design, video editing, content writing, photo editing, CV writing and social media services.">
 
-  <meta name="keywords" content="QuickTask BD, QuickTask BD Bangladesh, digital services Bangladesh, online services Bangladesh, logo design Bangladesh, poster design, video editing, content writing, photo editing, CV writing, social media services">
-
-  <meta name="author" content="QuickTask BD">
+  <meta name="keywords" content="QuickTask BD, Bangladesh digital services, logo design, poster design, video editing, content writing, photo editing, CV writing, social media services">
 
   <meta name="robots" content="index, follow">
 
   <link rel="canonical" href="https://mahbinrahmanturjo-cpu.github.io/QuickTaskBD/">
 
   <meta property="og:title" content="QuickTask BD | Affordable Digital Services">
-  <meta property="og:description" content="Affordable digital services for everyone in Bangladesh.">
+  <meta property="og:description" content="Affordable digital services in Bangladesh. Design, editing, writing and social media services.">
   <meta property="og:url" content="https://mahbinrahmanturjo-cpu.github.io/QuickTaskBD/">
   <meta property="og:type" content="website">
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
   <style>
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
       font-family: Arial, sans-serif;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
     body {
-      background: #090614;
-      color: white;
-      min-height: 100vh;
+      background: #f5f7fb;
+      color: #111827;
     }
 
     header {
-      background: #100a20;
-      border-bottom: 1px solid #2b2045;
-      padding: 16px 5%;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    .nav {
-      max-width: 1200px;
-      margin: auto;
+      background: #111827;
+      color: white;
+      padding: 15px 6%;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 15px;
+      gap: 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
 
     .logo {
-      font-size: 24px;
-      font-weight: bold;
-      color: #b47cff;
+      font-size: 23px;
+      font-weight: 800;
+      color: #38bdf8;
     }
 
-    .logo span {
-      color: white;
-    }
-
-    .nav-right {
+    nav {
       display: flex;
       gap: 8px;
-      align-items: center;
       flex-wrap: wrap;
+      justify-content: center;
     }
 
-    button {
-      cursor: pointer;
+    nav button,
+    nav a {
       border: none;
-    }
-
-    .nav-btn {
-      background: #1b1230;
+      text-decoration: none;
+      background: transparent;
       color: white;
-      border: 1px solid #39255c;
-      padding: 9px 14px;
-      border-radius: 10px;
+      padding: 9px 13px;
+      border-radius: 8px;
+      cursor: pointer;
       font-size: 14px;
     }
 
-    .nav-btn:hover {
-      background: #2a1948;
+    nav button:hover,
+    nav a:hover {
+      background: #1f2937;
+    }
+
+    .signup-btn {
+      background: #22c55e !important;
+      font-weight: 700;
     }
 
     .login-btn {
-      background: #8b5cf6;
-      border-color: #8b5cf6;
-    }
-
-    .register-btn {
-      background: #1b1230;
-    }
-
-    .logout {
-      background: #e63946;
-      border-color: #e63946;
-    }
-
-    .logout:hover {
-      background: #c92f3b;
+      background: #2563eb !important;
+      font-weight: 700;
     }
 
     .hero {
-      max-width: 1200px;
-      margin: auto;
-      padding: 75px 5% 50px;
+      padding: 75px 6% 60px;
       text-align: center;
-    }
-
-    .hero-badge {
-      display: inline-block;
-      background: #171027;
-      border: 1px solid #39255c;
-      color: #c8a8ff;
-      padding: 8px 14px;
-      border-radius: 30px;
-      font-size: 13px;
-      margin-bottom: 20px;
+      background: linear-gradient(135deg, #0f172a, #1e3a8a);
+      color: white;
     }
 
     .hero h1 {
-      font-size: 50px;
-      line-height: 1.15;
-      margin-bottom: 16px;
+      font-size: 42px;
+      margin-bottom: 15px;
     }
 
     .hero h1 span {
-      color: #b47cff;
+      color: #38bdf8;
     }
 
     .hero p {
-      color: #b9b1c9;
-      font-size: 18px;
-      line-height: 1.6;
-      margin: 0 auto 28px;
-      max-width: 700px;
+      max-width: 750px;
+      margin: auto;
+      line-height: 1.7;
+      color: #dbeafe;
+      font-size: 17px;
     }
 
-    .hero-actions {
+    .hero-buttons {
+      margin-top: 28px;
       display: flex;
       justify-content: center;
       gap: 12px;
-      margin-bottom: 35px;
       flex-wrap: wrap;
     }
 
-    .hero-btn {
+    .hero-buttons a,
+    .hero-buttons button {
       padding: 13px 22px;
       border-radius: 10px;
-      font-weight: bold;
+      border: none;
+      text-decoration: none;
+      cursor: pointer;
+      font-weight: 700;
       font-size: 15px;
     }
 
-    .primary {
-      background: #8b5cf6;
+    .join-btn {
+      background: #22c55e;
       color: white;
     }
 
-    .secondary {
-      background: #171027;
-      color: white;
-      border: 1px solid #39255c;
-    }
-
-    .search-box {
-      max-width: 650px;
-      margin: auto;
-      display: flex;
-      background: #120b22;
-      border: 1px solid #39255c;
-      border-radius: 14px;
-      overflow: hidden;
-    }
-
-    .search-box input {
-      flex: 1;
-      background: transparent;
-      border: none;
-      outline: none;
-      padding: 16px;
-      color: white;
-      font-size: 16px;
-    }
-
-    .search-box button {
-      background: #8b5cf6;
-      color: white;
-      padding: 0 25px;
-      font-weight: bold;
+    .hero-login {
+      background: white;
+      color: #111827;
     }
 
     .section {
-      max-width: 1200px;
+      max-width: 1150px;
       margin: auto;
-      padding: 25px 5% 60px;
+      padding: 50px 20px;
     }
 
     .section-title {
-      font-size: 28px;
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .section-title h2 {
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    .section-title p {
+      color: #64748b;
+    }
+
+    .member-box {
+      background: white;
+      border-radius: 18px;
+      padding: 28px;
+      margin-bottom: 35px;
+      text-align: center;
+      box-shadow: 0 8px 30px rgba(0,0,0,.06);
+    }
+
+    .member-box h2 {
+      margin-bottom: 10px;
+    }
+
+    .member-box p {
+      color: #64748b;
       margin-bottom: 20px;
     }
 
-    .section-description {
-      color: #a8a0b5;
-      margin-top: -10px;
-      margin-bottom: 25px;
-      line-height: 1.6;
+    .member-actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
-    .categories {
+    .member-actions a,
+    .member-actions button {
+      padding: 11px 20px;
+      border-radius: 9px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .green {
+      background: #22c55e;
+      color: white;
+    }
+
+    .blue {
+      background: #2563eb;
+      color: white;
+    }
+
+    .gray {
+      background: #e5e7eb;
+      color: #111827;
+    }
+
+    .filters {
       display: flex;
+      justify-content: center;
       gap: 10px;
       flex-wrap: wrap;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
     }
 
-    .category {
-      padding: 10px 16px;
-      background: #151024;
-      color: #cfc5df;
-      border: 1px solid #302344;
+    .filters button {
+      border: none;
+      padding: 9px 15px;
       border-radius: 20px;
+      cursor: pointer;
+      background: #e2e8f0;
+      color: #0f172a;
     }
 
-    .category.active,
-    .category:hover {
-      background: #8b5cf6;
+    .filters button.active {
+      background: #2563eb;
       color: white;
-      border-color: #8b5cf6;
+    }
+
+    .search-box {
+      max-width: 500px;
+      margin: 0 auto 25px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      outline: none;
+      font-size: 15px;
     }
 
     .services {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
+      gap: 20px;
     }
 
     .service-card {
-      background: #120c20;
-      border: 1px solid #2d2142;
-      border-radius: 16px;
-      padding: 22px;
-      transition: 0.2s;
+      background: white;
+      padding: 23px;
+      border-radius: 15px;
+      box-shadow: 0 7px 25px rgba(0,0,0,.06);
+      transition: .2s;
     }
 
     .service-card:hover {
       transform: translateY(-4px);
-      border-color: #8b5cf6;
-      box-shadow: 0 10px 35px rgba(139, 92, 246, 0.12);
-    }
-
-    .service-icon {
-      font-size: 35px;
-      margin-bottom: 15px;
     }
 
     .service-card h3 {
-      font-size: 20px;
       margin-bottom: 8px;
     }
 
-    .service-card p {
-      color: #9e96ac;
-      font-size: 14px;
-      margin-bottom: 15px;
-    }
-
-    .service-bottom {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
+    .category {
+      color: #64748b;
+      font-size: 13px;
+      margin-bottom: 14px;
     }
 
     .price {
-      color: #c49aff;
-      font-weight: bold;
-      font-size: 18px;
+      font-size: 21px;
+      font-weight: 800;
+      margin-bottom: 15px;
+      color: #2563eb;
     }
 
     .order-btn {
-      background: #8b5cf6;
-      color: white;
-      padding: 10px 15px;
+      width: 100%;
+      padding: 11px;
+      border: none;
       border-radius: 9px;
-      font-weight: bold;
+      background: #111827;
+      color: white;
+      cursor: pointer;
+      font-weight: 700;
     }
 
     .order-btn:hover {
-      background: #7342d9;
+      background: #2563eb;
     }
 
     .orders-section {
-      max-width: 1200px;
-      margin: auto;
-      padding: 10px 5% 70px;
+      display: none;
     }
 
-    .orders-box {
-      background: #120c20;
-      border: 1px solid #2d2142;
-      border-radius: 16px;
-      overflow: hidden;
-    }
-
-    .order-item {
+    .order-card {
+      background: white;
       padding: 18px;
-      border-bottom: 1px solid #2d2142;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-    }
-
-    .order-item:last-child {
-      border-bottom: none;
-    }
-
-    .order-info h4 {
-      margin-bottom: 6px;
-    }
-
-    .order-info p {
-      color: #948ca0;
-      font-size: 13px;
-    }
-
-    .status {
-      padding: 7px 12px;
-      border-radius: 20px;
-      font-size: 12px;
-      background: #241936;
-      color: #c7a8ff;
-      white-space: nowrap;
-    }
-
-    .empty {
-      padding: 30px;
-      text-align: center;
-      color: #938a9f;
-    }
-
-    .seo-info {
-      max-width: 900px;
-      margin: 0 auto 50px;
-      padding: 0 5%;
-    }
-
-    .seo-box {
-      background: #120c20;
-      border: 1px solid #2d2142;
-      border-radius: 16px;
-      padding: 25px;
-    }
-
-    .seo-box h2 {
+      border-radius: 12px;
       margin-bottom: 12px;
+      box-shadow: 0 5px 18px rgba(0,0,0,.05);
     }
 
-    .seo-box p {
-      color: #aaa2b5;
-      line-height: 1.7;
-      font-size: 15px;
+    .seo-text {
+      line-height: 1.8;
+      color: #475569;
     }
 
     footer {
-      border-top: 1px solid #2b2045;
+      background: #111827;
+      color: #cbd5e1;
       text-align: center;
-      padding: 25px;
-      color: #756c82;
-      font-size: 14px;
+      padding: 25px 15px;
+      margin-top: 30px;
     }
 
     .modal {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.75);
-      z-index: 999;
+      background: rgba(0,0,0,.65);
+      z-index: 2000;
       align-items: center;
       justify-content: center;
       padding: 20px;
     }
 
     .modal-box {
+      background: white;
       width: 100%;
-      max-width: 520px;
-      background: #120c20;
-      border: 1px solid #3b2859;
-      border-radius: 18px;
+      max-width: 500px;
+      border-radius: 15px;
       padding: 25px;
-      position: relative;
-      max-height: 90vh;
-      overflow-y: auto;
-    }
-
-    .close {
-      position: absolute;
-      right: 18px;
-      top: 15px;
-      background: transparent;
-      color: #aaa;
-      font-size: 25px;
     }
 
     .modal-box h2 {
-      margin-bottom: 8px;
+      margin-bottom: 18px;
     }
 
-    .selected-service {
-      color: #b47cff;
-      margin-bottom: 20px;
-    }
-
-    .form-group {
-      margin-bottom: 15px;
-    }
-
-    .form-group label {
+    .modal-box label {
       display: block;
-      margin-bottom: 7px;
-      font-size: 14px;
-      color: #cfc6da;
+      margin: 10px 0 6px;
+      font-weight: 600;
     }
 
-    .form-group input,
-    .form-group textarea {
+    .modal-box input,
+    .modal-box textarea {
       width: 100%;
-      padding: 13px;
-      border-radius: 10px;
-      border: 1px solid #392b4f;
+      padding: 11px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
       outline: none;
-      background: #0d0816;
-      color: white;
-      font-size: 14px;
     }
 
-    .form-group textarea {
+    .modal-box textarea {
       min-height: 100px;
       resize: vertical;
     }
 
-    .submit-order {
-      width: 100%;
-      padding: 14px;
-      background: #8b5cf6;
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .modal-actions button {
+      flex: 1;
+      padding: 11px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .close-btn {
+      background: #e5e7eb;
+    }
+
+    .submit-btn {
+      background: #2563eb;
       color: white;
-      border-radius: 10px;
-      font-weight: bold;
-      font-size: 15px;
-      margin-top: 5px;
     }
 
-    .submit-order:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
+    .user-area {
+      display: none;
+      align-items: center;
+      gap: 8px;
     }
 
-    .message {
-      margin-top: 12px;
-      font-size: 14px;
-      text-align: center;
+    .user-email {
+      font-size: 13px;
+      color: #cbd5e1;
     }
 
-    .success {
-      color: #52d273;
-    }
-
-    .error {
-      color: #ff6b6b;
+    .logout-btn {
+      background: #ef4444 !important;
+      font-weight: 700;
     }
 
     @media (max-width: 850px) {
@@ -489,43 +410,34 @@
       }
 
       .hero h1 {
-        font-size: 38px;
+        font-size: 34px;
       }
     }
 
     @media (max-width: 600px) {
-      .nav {
-        flex-wrap: wrap;
-      }
-
-      .logo {
-        font-size: 21px;
-      }
-
-      .nav-right {
-        width: 100%;
-        justify-content: flex-end;
-      }
-
-      .hero {
-        padding-top: 45px;
-      }
-
-      .hero h1 {
-        font-size: 32px;
+      header {
+        flex-direction: column;
       }
 
       .services {
         grid-template-columns: 1fr;
       }
 
-      .search-box button {
-        padding: 0 16px;
+      .hero {
+        padding: 55px 20px;
       }
 
-      .order-item {
-        align-items: flex-start;
-        flex-direction: column;
+      .hero h1 {
+        font-size: 30px;
+      }
+
+      nav {
+        width: 100%;
+      }
+
+      nav button,
+      nav a {
+        font-size: 13px;
       }
     }
   </style>
@@ -534,220 +446,295 @@
 <body>
 
 <header>
-  <div class="nav">
 
-    <div class="logo">
-      QuickTask <span>BD</span>
+  <div class="logo">QuickTask BD</div>
+
+  <nav>
+
+    <a href="#services">Services</a>
+
+    <a href="#about">About</a>
+
+    <a href="register.html" class="signup-btn">
+      Join as Member
+    </a>
+
+    <a href="login.html" class="login-btn">
+      Login
+    </a>
+
+    <button id="adminBtn" style="display:none;">
+      Admin
+    </button>
+
+    <div class="user-area" id="userArea">
+      <span class="user-email" id="userEmail"></span>
+
+      <button onclick="scrollToOrders()">
+        My Orders
+      </button>
+
+      <button class="logout-btn" onclick="logout()">
+        Logout
+      </button>
     </div>
 
-    <div class="nav-right" id="navButtons">
+  </nav>
 
-      <button class="nav-btn login-btn" onclick="goLogin()">
-        Login
-      </button>
-
-      <button class="nav-btn register-btn" onclick="goRegister()">
-        Register
-      </button>
-
-      <button class="nav-btn" onclick="goAdmin()">
-        Admin
-      </button>
-
-    </div>
-
-  </div>
 </header>
 
 
 <section class="hero">
 
-  <div class="hero-badge">
-    🇧🇩 Digital Services in Bangladesh
-  </div>
-
   <h1>
-    QuickTask BD — Get Things Done <span>Faster.</span>
+    QuickTask BD — <span>Get Things Done Faster.</span>
   </h1>
 
   <p>
-    QuickTask BD is an affordable digital service platform in Bangladesh.
-    Get logo design, poster design, video editing, content writing,
-    photo editing, CV writing and social media services easily.
+    Bangladesh-er affordable digital service platform.
+    Logo design, poster design, video editing, content writing,
+    photo editing, CV writing and social media services —
+    shobkichu ek jaygay.
   </p>
 
-  <div class="hero-actions">
+  <div class="hero-buttons">
 
-    <button class="hero-btn primary" onclick="scrollToServices()">
-      Explore Services
-    </button>
+    <a href="register.html" class="join-btn">
+      🚀 Join as a Member
+    </a>
 
-    <button class="hero-btn secondary" onclick="goRegister()">
-      Create Account
-    </button>
-
-  </div>
-
-  <div class="search-box">
-
-    <input
-      type="text"
-      id="searchInput"
-      placeholder="Search digital services..."
-      onkeyup="searchServices()"
-    >
-
-    <button onclick="searchServices()">
-      Search
-    </button>
+    <a href="login.html" class="hero-login">
+      🔐 Already a Member? Login
+    </a>
 
   </div>
 
 </section>
 
 
-<section class="section" id="servicesSection">
+<main class="section">
 
-  <h2 class="section-title">
-    Affordable Digital Services in Bangladesh
-  </h2>
+  <div class="member-box">
 
-  <p class="section-description">
-    Choose from affordable digital services including design, editing,
-    writing and social media services. Create an account to place an order.
-  </p>
-
-  <div class="categories">
-
-    <button class="category active" onclick="filterCategory('All', this)">
-      All
-    </button>
-
-    <button class="category" onclick="filterCategory('Design', this)">
-      🎨 Design
-    </button>
-
-    <button class="category" onclick="filterCategory('Editing', this)">
-      🎬 Editing
-    </button>
-
-    <button class="category" onclick="filterCategory('Writing', this)">
-      ✍️ Writing
-    </button>
-
-    <button class="category" onclick="filterCategory('Social Media', this)">
-      📱 Social Media
-    </button>
-
-  </div>
-
-  <div class="services" id="servicesContainer"></div>
-
-</section>
-
-
-<section class="seo-info">
-
-  <div class="seo-box">
-
-    <h2>Why Choose QuickTask BD?</h2>
+    <h2>👤 Join QuickTask BD</h2>
 
     <p>
-      QuickTask BD helps customers in Bangladesh find affordable digital
-      services in one place. Whether you need a logo, poster, short video,
-      photo editing, content writing, CV writing or social media support,
-      QuickTask BD makes it simple to find a service and place an order.
+      Member account create kore available services browse koro
+      ebong nijer order submit koro.
     </p>
 
-  </div>
+    <div class="member-actions">
 
-</section>
+      <a href="register.html" class="green">
+        Create Free Account
+      </a>
 
+      <a href="login.html" class="blue">
+        Login
+      </a>
 
-<section class="orders-section" id="ordersSection" style="display:none;">
-
-  <h2 class="section-title">
-    My Orders 📦
-  </h2>
-
-  <div class="orders-box" id="ordersContainer">
-    <div class="empty">
-      Loading orders...
     </div>
+
   </div>
 
-</section>
+
+  <div id="services">
+
+    <div class="section-title">
+
+      <h2>Our Services</h2>
+
+      <p>
+        Choose a service and place your order easily.
+      </p>
+
+    </div>
+
+
+    <div class="search-box">
+
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="🔎 Search a service..."
+        oninput="filterServices()"
+      >
+
+    </div>
+
+
+    <div class="filters">
+
+      <button class="active" onclick="setCategory('All', this)">
+        All
+      </button>
+
+      <button onclick="setCategory('Design', this)">
+        Design
+      </button>
+
+      <button onclick="setCategory('Editing', this)">
+        Editing
+      </button>
+
+      <button onclick="setCategory('Writing', this)">
+        Writing
+      </button>
+
+      <button onclick="setCategory('Social Media', this)">
+        Social Media
+      </button>
+
+    </div>
+
+
+    <div class="services" id="serviceContainer"></div>
+
+  </div>
+
+
+  <section id="about" style="margin-top:55px;">
+
+    <div class="section-title">
+
+      <h2>Why Choose QuickTask BD?</h2>
+
+    </div>
+
+    <div class="seo-text">
+
+      <p>
+        QuickTask BD is a Bangladesh-based digital service platform
+        designed to make affordable online services easier to access.
+        Customers can create a free account, browse available services
+        and submit orders online.
+      </p>
+
+      <br>
+
+      <p>
+        Our services include logo design, poster design, short video
+        editing, content writing, Instagram setup, notes formatting,
+        photo editing, social media captions and CV writing.
+      </p>
+
+      <br>
+
+      <p>
+        Create your free member account today and get started with
+        QuickTask BD.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <section class="orders-section" id="ordersSection">
+
+    <div class="section-title">
+
+      <h2>📦 My Orders</h2>
+
+      <p>Your submitted orders will appear here.</p>
+
+    </div>
+
+    <div id="ordersContainer"></div>
+
+  </section>
+
+</main>
 
 
 <footer>
-  © 2026 QuickTask BD — All Rights Reserved.
+
+  <p>© 2026 QuickTask BD. All rights reserved.</p>
+
+  <p style="margin-top:7px;">
+    Affordable Digital Services in Bangladesh
+  </p>
+
 </footer>
 
+
+<!-- ORDER MODAL -->
 
 <div class="modal" id="orderModal">
 
   <div class="modal-box">
 
-    <button class="close" onclick="closeModal()">×</button>
+    <h2>Place Your Order</h2>
 
-    <h2>Place Your Order 🚀</h2>
+    <form id="orderForm">
 
-    <div class="selected-service" id="selectedService">
-      Service
-    </div>
+      <input type="hidden" id="serviceName">
 
-    <div class="form-group">
+      <input type="hidden" id="servicePrice">
+
+      <p id="selectedService"
+         style="margin-bottom:15px;font-weight:700;color:#2563eb;">
+      </p>
 
       <label>Your Name</label>
 
       <input
         type="text"
         id="customerName"
+        required
         placeholder="Enter your name"
       >
 
-    </div>
-
-    <div class="form-group">
-
-      <label>Email</label>
+      <label>Your Email</label>
 
       <input
         type="email"
         id="customerEmail"
+        required
         placeholder="Enter your email"
-        readonly
       >
-
-    </div>
-
-    <div class="form-group">
 
       <label>Order Details</label>
 
       <textarea
         id="orderDetails"
-        placeholder="Explain what you need..."
+        required
+        placeholder="Describe what you need..."
       ></textarea>
 
-    </div>
+      <div class="modal-actions">
 
-    <button
-      class="submit-order"
-      id="submitOrderBtn"
-      onclick="submitOrder()"
-    >
-      Confirm Order
-    </button>
+        <button
+          type="button"
+          class="close-btn"
+          onclick="closeOrderModal()"
+        >
+          Cancel
+        </button>
 
-    <div class="message" id="orderMessage"></div>
+        <button
+          type="submit"
+          class="submit-btn"
+        >
+          Submit Order
+        </button>
+
+      </div>
+
+    </form>
 
   </div>
 
 </div>
 
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
+
+  /* =========================
+     SUPABASE CONFIG
+  ========================= */
 
   const SUPABASE_URL =
     "https://xamgccoeerfzmcwmjnms.supabase.co";
@@ -756,274 +743,149 @@
     "sb_publishable_7F09Y9Mt87AltPc1cMTl6A_9FrdYlHq";
 
   const supabaseClient =
-    supabase.createClient(
+    window.supabase.createClient(
       SUPABASE_URL,
       SUPABASE_KEY
     );
 
 
+  /* =========================
+     SERVICES
+  ========================= */
+
   const services = [
 
     {
-      id: 1,
       name: "Logo Design",
       category: "Design",
-      price: 300,
-      icon: "🎨"
+      price: 300
     },
 
     {
-      id: 2,
       name: "Poster Design",
       category: "Design",
-      price: 250,
-      icon: "🖼️"
+      price: 250
     },
 
     {
-      id: 3,
       name: "Short Video Editing",
       category: "Editing",
-      price: 400,
-      icon: "🎬"
+      price: 400
     },
 
     {
-      id: 4,
       name: "Content Writing",
       category: "Writing",
-      price: 200,
-      icon: "✍️"
+      price: 200
     },
 
     {
-      id: 5,
       name: "Instagram Setup",
       category: "Social Media",
-      price: 350,
-      icon: "📱"
+      price: 350
     },
 
     {
-      id: 6,
       name: "Notes Formatting",
       category: "Writing",
-      price: 150,
-      icon: "📚"
+      price: 150
     },
 
     {
-      id: 7,
       name: "Photo Editing",
       category: "Editing",
-      price: 200,
-      icon: "📸"
+      price: 200
     },
 
     {
-      id: 8,
       name: "Social Media Captions",
       category: "Social Media",
-      price: 100,
-      icon: "💬"
+      price: 100
     },
 
     {
-      id: 9,
       name: "CV Writing",
       category: "Writing",
-      price: 300,
-      icon: "📄"
+      price: 300
     }
 
   ];
 
 
-  let currentUser = null;
-  let selectedService = null;
   let currentCategory = "All";
 
 
-  async function checkLogin() {
-
-    const {
-      data: { session }
-    } = await supabaseClient.auth.getSession();
-
-    currentUser = session ? session.user : null;
-
-    updateNavigation();
-
-    renderServices();
-
-    if (currentUser) {
-
-      loadUserInfo();
-
-      document.getElementById("ordersSection").style.display = "block";
-
-      loadOrders();
-
-    }
-
-  }
-
-
-  function updateNavigation() {
-
-    const nav =
-      document.getElementById("navButtons");
-
-    if (currentUser) {
-
-      nav.innerHTML = `
-
-        <button class="nav-btn" onclick="goAdmin()">
-          Admin
-        </button>
-
-        <button class="nav-btn logout" onclick="logout()">
-          Logout
-        </button>
-
-      `;
-
-    } else {
-
-      nav.innerHTML = `
-
-        <button class="nav-btn login-btn" onclick="goLogin()">
-          Login
-        </button>
-
-        <button class="nav-btn register-btn" onclick="goRegister()">
-          Register
-        </button>
-
-        <button class="nav-btn" onclick="goAdmin()">
-          Admin
-        </button>
-
-      `;
-
-    }
-
-  }
-
-
-  function loadUserInfo() {
-
-    if (!currentUser) return;
-
-    const fullName =
-      currentUser.user_metadata?.full_name || "";
-
-    document.getElementById("customerName").value =
-      fullName;
-
-    document.getElementById("customerEmail").value =
-      currentUser.email || "";
-
-  }
-
+  /* =========================
+     RENDER SERVICES
+  ========================= */
 
   function renderServices() {
 
     const container =
-      document.getElementById("servicesContainer");
+      document.getElementById("serviceContainer");
 
     const search =
       document.getElementById("searchInput")
         .value
-        .toLowerCase()
-        .trim();
+        .toLowerCase();
 
+    container.innerHTML = "";
 
-    const filtered =
-      services.filter(service => {
+    services.forEach(service => {
 
-        const categoryMatch =
-          currentCategory === "All" ||
-          service.category === currentCategory;
+      const categoryMatch =
+        currentCategory === "All" ||
+        service.category === currentCategory;
 
-        const searchMatch =
-          service.name
-            .toLowerCase()
-            .includes(search);
+      const searchMatch =
+        service.name.toLowerCase().includes(search) ||
+        service.category.toLowerCase().includes(search);
 
-        return categoryMatch && searchMatch;
+      if (!categoryMatch || !searchMatch) {
+        return;
+      }
 
-      });
+      const card =
+        document.createElement("div");
 
+      card.className = "service-card";
 
-    if (filtered.length === 0) {
+      card.innerHTML = `
 
-      container.innerHTML = `
-        <div class="empty" style="grid-column:1/-1;">
-          No services found 😕
+        <h3>${service.name}</h3>
+
+        <div class="category">
+          ${service.category}
         </div>
+
+        <div class="price">
+          ৳${service.price}
+        </div>
+
+        <button
+          class="order-btn"
+          onclick="openOrder('${service.name}', ${service.price})"
+        >
+          🛒 Order Now
+        </button>
+
       `;
 
-      return;
-    }
+      container.appendChild(card);
 
-
-    container.innerHTML =
-      filtered.map(service => `
-
-        <div class="service-card">
-
-          <div class="service-icon">
-            ${service.icon}
-          </div>
-
-          <h3>
-            ${escapeHtml(service.name)}
-          </h3>
-
-          <p>
-            Category: ${escapeHtml(service.category)}
-          </p>
-
-          <div class="service-bottom">
-
-            <div class="price">
-              ৳${service.price}
-            </div>
-
-            <button
-              class="order-btn"
-              onclick="openOrder(${service.id})"
-            >
-              Order Now
-            </button>
-
-          </div>
-
-        </div>
-
-      `).join("");
+    });
 
   }
 
 
-  function searchServices() {
-
-    renderServices();
-
-  }
-
-
-  function filterCategory(category, button) {
+  function setCategory(category, button) {
 
     currentCategory = category;
 
     document
-      .querySelectorAll(".category")
+      .querySelectorAll(".filters button")
       .forEach(btn => {
-
         btn.classList.remove("active");
-
       });
 
     button.classList.add("active");
@@ -1033,59 +895,100 @@
   }
 
 
-  function openOrder(serviceId) {
+  function filterServices() {
+    renderServices();
+  }
 
-    if (!currentUser) {
 
-      alert("Please login or create an account to place an order.");
+  /* =========================
+     AUTH CHECK
+  ========================= */
 
-      window.location.href = "login.html";
+  async function checkUser() {
 
-      return;
+    const {
+      data: { session }
+    } = await supabaseClient.auth.getSession();
+
+
+    if (session) {
+
+      document
+        .getElementById("userArea")
+        .style.display = "flex";
+
+
+      document
+        .getElementById("userEmail")
+        .textContent =
+        session.user.email;
+
+
+      document
+        .querySelectorAll(".signup-btn, .login-btn")
+        .forEach(btn => {
+          btn.style.display = "none";
+        });
+
+
+      await checkAdmin(session.user.id);
+
+      await loadOrders();
 
     }
 
+  }
 
-    selectedService =
-      services.find(
-        service => service.id === serviceId
+
+  /* =========================
+     ADMIN CHECK
+  ========================= */
+
+  async function checkAdmin(userId) {
+
+    const {
+      data,
+      error
+    } = await supabaseClient
+      .from("admin_users")
+      .select("user_id")
+      .eq("user_id", userId)
+      .maybeSingle();
+
+
+    if (!error && data) {
+
+      const adminBtn =
+        document.getElementById("adminBtn");
+
+      adminBtn.style.display = "inline-block";
+
+      adminBtn.onclick = () => {
+        window.location.href = "admin.html";
+      };
+
+    }
+
+  }
+
+
+  /* =========================
+     OPEN ORDER
+  ========================= */
+
+  async function openOrder(serviceName, price) {
+
+    const {
+      data: { session }
+    } = await supabaseClient.auth.getSession();
+
+
+    if (!session) {
+
+      alert(
+        "Please create a member account or login first. 🙂"
       );
 
-    if (!selectedService) return;
-
-
-    document.getElementById("selectedService")
-      .innerHTML = `
-        ${selectedService.icon}
-        ${escapeHtml(selectedService.name)}
-        — ৳${selectedService.price}
-      `;
-
-
-    document.getElementById("orderDetails").value = "";
-
-    document.getElementById("orderMessage").innerHTML = "";
-
-    document.getElementById("submitOrderBtn").disabled = false;
-
-    loadUserInfo();
-
-    document.getElementById("orderModal").style.display = "flex";
-
-  }
-
-
-  function closeModal() {
-
-    document.getElementById("orderModal").style.display = "none";
-
-  }
-
-
-  async function submitOrder() {
-
-    if (!currentUser) {
-
       window.location.href = "login.html";
 
       return;
@@ -1093,161 +996,162 @@
     }
 
 
-    if (!selectedService) {
-
-      alert("Please select a service.");
-
-      return;
-
-    }
+    document
+      .getElementById("serviceName")
+      .value = serviceName;
 
 
-    const customerName =
-      document.getElementById("customerName")
-        .value
-        .trim();
-
-    const customerEmail =
-      document.getElementById("customerEmail")
-        .value
-        .trim();
-
-    const details =
-      document.getElementById("orderDetails")
-        .value
-        .trim();
+    document
+      .getElementById("servicePrice")
+      .value = price;
 
 
-    const message =
-      document.getElementById("orderMessage");
-
-    const submitBtn =
-      document.getElementById("submitOrderBtn");
-
-
-    if (!customerName) {
-
-      message.className = "message error";
-
-      message.innerText =
-        "Please enter your name.";
-
-      return;
-
-    }
+    document
+      .getElementById("selectedService")
+      .textContent =
+      `${serviceName} — ৳${price}`;
 
 
-    if (!details) {
-
-      message.className = "message error";
-
-      message.innerText =
-        "Please enter your order details.";
-
-      return;
-
-    }
+    document
+      .getElementById("customerEmail")
+      .value =
+      session.user.email || "";
 
 
-    submitBtn.disabled = true;
-
-    submitBtn.innerText =
-      "Submitting...";
-
-
-    const { error } =
-      await supabaseClient
-        .from("orders")
-        .insert([
-
-          {
-            user_id: currentUser.id,
-
-            service_name:
-              selectedService.name,
-
-            price:
-              selectedService.price,
-
-            customer_name:
-              customerName,
-
-            customer_email:
-              customerEmail,
-
-            details:
-              details,
-
-            status:
-              "Pending"
-          }
-
-        ]);
-
-
-    if (error) {
-
-      console.error(error);
-
-      message.className =
-        "message error";
-
-      message.innerText =
-        "Order failed: " +
-        error.message;
-
-      submitBtn.disabled = false;
-
-      submitBtn.innerText =
-        "Confirm Order";
-
-      return;
-
-    }
-
-
-    message.className =
-      "message success";
-
-    message.innerText =
-      "Order placed successfully! 🎉";
-
-
-    submitBtn.innerText =
-      "Order Placed ✓";
-
-
-    await loadOrders();
-
-
-    setTimeout(() => {
-
-      closeModal();
-
-      submitBtn.disabled = false;
-
-      submitBtn.innerText =
-        "Confirm Order";
-
-    }, 1200);
+    document
+      .getElementById("orderModal")
+      .style.display = "flex";
 
   }
 
+
+  function closeOrderModal() {
+
+    document
+      .getElementById("orderModal")
+      .style.display = "none";
+
+  }
+
+
+  /* =========================
+     SUBMIT ORDER
+  ========================= */
+
+  document
+    .getElementById("orderForm")
+    .addEventListener("submit", async function(e) {
+
+      e.preventDefault();
+
+
+      const {
+        data: { session }
+      } = await supabaseClient.auth.getSession();
+
+
+      if (!session) {
+
+        alert("Please login first.");
+
+        window.location.href = "login.html";
+
+        return;
+
+      }
+
+
+      const serviceName =
+        document.getElementById("serviceName").value;
+
+      const servicePrice =
+        Number(
+          document.getElementById("servicePrice").value
+        );
+
+      const customerName =
+        document.getElementById("customerName").value;
+
+      const customerEmail =
+        document.getElementById("customerEmail").value;
+
+      const details =
+        document.getElementById("orderDetails").value;
+
+
+      const { error } =
+        await supabaseClient
+          .from("orders")
+          .insert({
+
+            user_id: session.user.id,
+
+            service_name: serviceName,
+
+            price: servicePrice,
+
+            customer_name: customerName,
+
+            customer_email: customerEmail,
+
+            details: details,
+
+            status: "Pending"
+
+          });
+
+
+      if (error) {
+
+        console.error(error);
+
+        alert(
+          "Order submit failed. Please try again."
+        );
+
+        return;
+
+      }
+
+
+      alert(
+        "Order submitted successfully! ✅"
+      );
+
+
+      closeOrderModal();
+
+      document
+        .getElementById("orderForm")
+        .reset();
+
+
+      await loadOrders();
+
+      scrollToOrders();
+
+    });
+
+
+  /* =========================
+     LOAD MY ORDERS
+  ========================= */
 
   async function loadOrders() {
 
-    if (!currentUser) return;
+    const {
+      data: { session }
+    } = await supabaseClient.auth.getSession();
 
 
-    const container =
-      document.getElementById("ordersContainer");
+    if (!session) return;
 
 
     const { data, error } =
       await supabaseClient
         .from("orders")
         .select("*")
-        .eq("user_id", currentUser.id)
+        .eq("user_id", session.user.id)
         .order("created_at", {
           ascending: false
         });
@@ -1257,23 +1161,35 @@
 
       console.error(error);
 
-      container.innerHTML = `
-        <div class="empty">
-          Could not load orders.
-        </div>
-      `;
-
       return;
 
     }
+
+
+    const section =
+      document.getElementById("ordersSection");
+
+    const container =
+      document.getElementById("ordersContainer");
+
+
+    section.style.display = "block";
+
+    container.innerHTML = "";
 
 
     if (!data || data.length === 0) {
 
       container.innerHTML = `
-        <div class="empty">
-          You haven't placed any orders yet. 📦
+
+        <div class="order-card">
+
+          <p>
+            You haven't placed any orders yet.
+          </p>
+
         </div>
+
       `;
 
       return;
@@ -1281,76 +1197,53 @@
     }
 
 
-    container.innerHTML =
-      data.map(order => `
+    data.forEach(order => {
 
-        <div class="order-item">
+      const card =
+        document.createElement("div");
 
-          <div class="order-info">
+      card.className = "order-card";
 
-            <h4>
-              ${escapeHtml(
-                order.service_name || "Service"
-              )}
-            </h4>
+      card.innerHTML = `
 
-            <p>
-              Order ID:
-              ${escapeHtml(String(order.id))}
-            </p>
+        <h3>
+          ${order.service_name || "Service"}
+        </h3>
 
-            <p>
-              Price:
-              ৳${escapeHtml(String(order.price || 0))}
-            </p>
+        <p style="margin-top:7px;">
+          Price: <strong>
+            ৳${order.price || 0}
+          </strong>
+        </p>
 
-            <p>
-              ${formatDate(order.created_at)}
-            </p>
+        <p style="margin-top:7px;">
+          Status:
+          <strong>
+            ${order.status || "Pending"}
+          </strong>
+        </p>
 
-          </div>
+        <p style="margin-top:7px;color:#64748b;">
+          ${order.details || ""}
+        </p>
 
-          <div class="status">
-            ${escapeHtml(
-              order.status || "Pending"
-            )}
-          </div>
+      `;
 
-        </div>
+      container.appendChild(card);
 
-      `).join("");
+    });
 
   }
 
 
-  function goAdmin() {
+  /* =========================
+     SCROLL TO ORDERS
+  ========================= */
 
-    window.location.href =
-      "admin.html";
-
-  }
-
-
-  function goLogin() {
-
-    window.location.href =
-      "login.html";
-
-  }
-
-
-  function goRegister() {
-
-    window.location.href =
-      "register.html";
-
-  }
-
-
-  function scrollToServices() {
+  function scrollToOrders() {
 
     document
-      .getElementById("servicesSection")
+      .getElementById("ordersSection")
       .scrollIntoView({
         behavior: "smooth"
       });
@@ -1358,68 +1251,41 @@
   }
 
 
+  /* =========================
+     LOGOUT
+  ========================= */
+
   async function logout() {
 
-    const { error } =
-      await supabaseClient.auth.signOut();
-
-
-    if (error) {
-
-      alert(
-        "Logout failed: " +
-        error.message
-      );
-
-      return;
-
-    }
-
+    await supabaseClient.auth.signOut();
 
     window.location.reload();
 
   }
 
 
-  function escapeHtml(value) {
+  /* =========================
+     START
+  ========================= */
 
-    return String(value)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
+  renderServices();
 
-  }
+  checkUser();
 
 
-  function formatDate(date) {
-
-    if (!date) return "";
-
-    return new Date(date)
-      .toLocaleString("en-BD", {
-        dateStyle: "medium",
-        timeStyle: "short"
-      });
-
-  }
-
+  /* =========================
+     CLOSE MODAL ON BACKDROP
+  ========================= */
 
   document
     .getElementById("orderModal")
     .addEventListener("click", function(e) {
 
       if (e.target === this) {
-
-        closeModal();
-
+        closeOrderModal();
       }
 
     });
-
-
-  checkLogin();
 
 </script>
 
