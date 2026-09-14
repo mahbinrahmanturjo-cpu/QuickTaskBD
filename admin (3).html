@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>QuickTask BD - Admin Panel</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #0b0714;
+      color: white;
+      min-height: 100vh;
+    }
+
+    nav {
+      height: 70px;
+      background: #120b20;
+      border-bottom: 1px solid #2b1c3f;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 6%;
+    }
+
+    .logo {
+      color: #b77aff;
+      font-size: 23px;
+      font-weight: bold;
+    }
+
+    .back-btn,
+    .logout-btn {
+      border: none;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-left: 7px;
+    }
+
+    .back-btn {
+      background: #211334;
+    }
+
+    .logout-btn {
+      background: #7b2cff;
+    }
+
+    .container {
+      width: min(1200px, 92%);
+      margin: auto;
+      padding: 35px 0 60px;
+    }
+
+    h1 {
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: #978ba4;
+      margin-bottom: 30px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .stat {
+      background: #15101f;
+      border: 1px solid #2c203a;
+      padding: 20px;
+      border-radius: 12px;
+    }
+
+    .stat-title {
+      color: #978ba4;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .stat-number {
+      font-size: 25px;
+      font-weight: bold;
+      color: #c18aff;
+    }
+
+    .orders {
+      display: grid;
+      gap: 15px;
+    }
+
+    .order {
+      background: #15101f;
+      border: 1px solid #2c203a;
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .order-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .service {
+      font-size: 19px;
+      font-weight: bold;
+    }
+
+    .price {
+      color: #c18aff;
+      font-weight: bold;
+    }
+
+    .info {
+      color: #aaa0b8;
+      line-height: 1.7;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .details {
+      background: #0f0a17;
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 8px;
+      color: #d7cfdf;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    select {
+      background: #0f0a17;
+      color: white;
+      border: 1px solid #3a2850;
+      padding: 10px;
+      border-radius: 8px;
+      outline: none;
+    }
+
+    .update-btn {
+      background: #7b2cff;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .update-btn:disabled {
+      opacity: 0.6;
+    }
+
+    .date {
+      color: #777080;
+      font-size: 12px;
+      margin-top: 12px;
+    }
+
+    .loading,
+    .empty,
+    .error {
+      text-align: center;
+      padding: 40px;
+      color: #938899;
+    }
+
+    .error {
+      color: #ff7f8c;
+    }
+
+    @media (max-width: 800px) {
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 500px) {
+      nav {
+        padding: 0 4%;
+      }
+
+      .logo {
+        font-size: 18px;
+      }
+
+      .back-btn,
+      .logout-btn {
+        padding: 8px 10px;
+        font-size: 12px;
+      }
+
+      .stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .order-header {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<nav>
+  <div class="logo">QuickTask BD Admin</div>
+
+  <div>
+    <button class="back-btn" onclick="goHome()">
+      Home
+    </button>
+
+    <button class="logout-btn" onclick="logout()">
+      Logout
+    </button>
+  </div>
+</nav>
+
+
+<div class="container">
+
+  <h1>Admin Dashboard 👑</h1>
+
+  <p class="subtitle">
+    Manage customer orders from here.
+  </p>
+
+
+  <div class="stats">
+
+    <div class="stat">
+      <div class="stat-title">Total Orders</div>
+      <div id="totalOrders" class="stat-number">0</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-title">Pending</div>
+      <div id="pendingOrders" class="stat-number">0</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-title">In Progress</div>
+      <div id="progressOrders" class="stat-number">0</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-title">Completed</div>
+      <div id="completedOrders" class="stat-number">0</div>
+    </div>
+
+  </div>
+
+
+  <div id="orders" class="orders">
+    <div class="loading">
+      Loading orders...
+    </div>
+  </div>
+
+</div>
+
+
+<script>
+
+  /* =========================================
+     SUPABASE CONFIG
+     ========================================= */
+
+  const SUPABASE_URL =
+    "https://xamgccoeerfzmcwmjnms.supabase.co";
+
+  const SUPABASE_KEY =
+    "sb_publishable_7F09Y9Mt87AltPc1cMTl6A_9FrdYlHq";
+
+  const supabaseClient =
+    supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+
+  let currentUser = null;
+
+
+  /* =========================================
+     CHECK ADMIN
+     ========================================= */
+
+  async function checkAdmin() {
+
+    const {
+      data: { session },
+      error
+    } = await supabaseClient.auth.getSession();
+
+    if (error || !session) {
+      window.location.href = "login.html";
+      return;
+    }
+
+    currentUser = session.user;
+
+    const { data: admin, error: adminError } =
+      await supabaseClient
+        .from("admin_users")
+        .select("user_id")
+        .eq("user_id", currentUser.id)
+        .maybeSingle();
+
+    if (adminError || !admin) {
+
+      alert("Access denied! Admin only.");
+
+      window.location.href = "index.html";
+
+      return;
+    }
+
+    loadOrders();
+  }
+
+
+  /* =========================================
+     LOAD ALL ORDERS
+     ========================================= */
+
+  async function loadOrders() {
+
+    const ordersContainer =
+      document.getElementById("orders");
+
+    ordersContainer.innerHTML =
+      `<div class="loading">Loading orders...</div>`;
+
+
+    const { data, error } =
+      await supabaseClient
+        .from("orders")
+        .select("*")
+        .order("created_at", {
+          ascending: false
+        });
+
+
+    if (error) {
+
+      console.error(error);
+
+      ordersContainer.innerHTML =
+        `<div class="error">
+          Failed to load orders.<br>
+          ${escapeHtml(error.message)}
+        </div>`;
+
+      return;
+    }
+
+
+    updateStats(data || []);
+
+
+    if (!data || data.length === 0) {
+
+      ordersContainer.innerHTML =
+        `<div class="empty">
+          No orders yet.
+        </div>`;
+
+      return;
+    }
+
+
+    ordersContainer.innerHTML =
+      data.map(order => {
+
+        const date =
+          new Date(order.created_at)
+            .toLocaleString();
+
+
+        return `
+          <div class="order">
+
+            <div class="order-header">
+
+              <div class="service">
+                ${escapeHtml(order.service_name)}
+              </div>
+
+              <div class="price">
+                ৳${escapeHtml(order.price)}
+              </div>
+
+            </div>
+
+
+            <div class="info">
+
+              <div>
+                <strong>Customer:</strong>
+                ${escapeHtml(order.customer_name)}
+              </div>
+
+              <div>
+                <strong>Email:</strong>
+                ${escapeHtml(order.customer_email)}
+              </div>
+
+              <div>
+                <strong>Order ID:</strong>
+                ${escapeHtml(order.id)}
+              </div>
+
+              <div class="details">
+                <strong>Details:</strong><br>
+                ${escapeHtml(order.details)}
+              </div>
+
+            </div>
+
+
+            <div class="controls">
+
+              <select id="status-${order.id}">
+
+                <option value="Pending"
+                  ${order.status === "Pending" ? "selected" : ""}>
+                  Pending
+                </option>
+
+                <option value="In Progress"
+                  ${order.status === "In Progress" ? "selected" : ""}>
+                  In Progress
+                </option>
+
+                <option value="Completed"
+                  ${order.status === "Completed" ? "selected" : ""}>
+                  Completed
+                </option>
+
+                <option value="Cancelled"
+                  ${order.status === "Cancelled" ? "selected" : ""}>
+                  Cancelled
+                </option>
+
+              </select>
+
+
+              <button
+                class="update-btn"
+                onclick="updateStatus('${order.id}')"
+              >
+                Update Status
+              </button>
+
+            </div>
+
+
+            <div class="date">
+              ${escapeHtml(date)}
+            </div>
+
+          </div>
+        `;
+
+      }).join("");
+  }
+
+
+  /* =========================================
+     UPDATE STATUS
+     ========================================= */
+
+  async function updateStatus(orderId) {
+
+    const select =
+      document.getElementById(
+        "status-" + orderId
+      );
+
+    const newStatus = select.value;
+
+
+    const buttons =
+      document.querySelectorAll(".update-btn");
+
+    buttons.forEach(btn => {
+      btn.disabled = true;
+    });
+
+
+    const { error } =
+      await supabaseClient
+        .from("orders")
+        .update({
+          status: newStatus
+        })
+        .eq("id", orderId);
+
+
+    buttons.forEach(btn => {
+      btn.disabled = false;
+    });
+
+
+    if (error) {
+
+      alert(
+        "Status update failed: " +
+        error.message
+      );
+
+      return;
+    }
+
+
+    alert("Status updated successfully! ✅");
+
+    loadOrders();
+  }
+
+
+  /* =========================================
+     STATS
+     ========================================= */
+
+  function updateStats(orders) {
+
+    document.getElementById("totalOrders")
+      .innerText = orders.length;
+
+
+    document.getElementById("pendingOrders")
+      .innerText =
+      orders.filter(
+        order => order.status === "Pending"
+      ).length;
+
+
+    document.getElementById("progressOrders")
+      .innerText =
+      orders.filter(
+        order => order.status === "In Progress"
+      ).length;
+
+
+    document.getElementById("completedOrders")
+      .innerText =
+      orders.filter(
+        order => order.status === "Completed"
+      ).length;
+  }
+
+
+  /* =========================================
+     LOGOUT
+     ========================================= */
+
+  async function logout() {
+
+    await supabaseClient.auth.signOut();
+
+    window.location.href = "login.html";
+  }
+
+
+  /* =========================================
+     HOME
+     ========================================= */
+
+  function goHome() {
+    window.location.href = "index.html";
+  }
+
+
+  /* =========================================
+     SECURITY
+     ========================================= */
+
+  function escapeHtml(value) {
+
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+
+  /* =========================================
+     START
+     ========================================= */
+
+  checkAdmin();
+
+</script>
+
+</body>
+</html>

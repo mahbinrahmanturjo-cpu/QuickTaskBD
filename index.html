@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>QuickTask BD - Get Things Done</title>
+  <meta name="description" content="QuickTask BD - Find affordable digital services in Bangladesh.">
+  <meta name="keywords" content="QuickTask BD, digital services Bangladesh, logo design, poster design, video editing, content writing">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #090614;
+      color: white;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #100a20;
+      border-bottom: 1px solid #2b2045;
+      padding: 16px 5%;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #b47cff;
+    }
+
+    .logo span {
+      color: white;
+    }
+
+    .nav-right {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+    }
+
+    .nav-btn {
+      background: #1b1230;
+      color: white;
+      border: 1px solid #39255c;
+      padding: 9px 14px;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+
+    .nav-btn:hover {
+      background: #2a1948;
+    }
+
+    .logout {
+      background: #e63946;
+      border-color: #e63946;
+    }
+
+    .logout:hover {
+      background: #c92f3b;
+    }
+
+    .hero {
+      max-width: 1200px;
+      margin: auto;
+      padding: 70px 5% 45px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      line-height: 1.15;
+      margin-bottom: 15px;
+    }
+
+    .hero h1 span {
+      color: #b47cff;
+    }
+
+    .hero p {
+      color: #b9b1c9;
+      font-size: 17px;
+      margin-bottom: 28px;
+    }
+
+    .search-box {
+      max-width: 650px;
+      margin: auto;
+      display: flex;
+      background: #120b22;
+      border: 1px solid #39255c;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .search-box input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      padding: 16px;
+      color: white;
+      font-size: 16px;
+    }
+
+    .search-box button {
+      background: #8b5cf6;
+      color: white;
+      padding: 0 25px;
+      font-weight: bold;
+    }
+
+    .section {
+      max-width: 1200px;
+      margin: auto;
+      padding: 25px 5% 60px;
+    }
+
+    .section-title {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .categories {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .category {
+      padding: 10px 16px;
+      background: #151024;
+      color: #cfc5df;
+      border: 1px solid #302344;
+      border-radius: 20px;
+    }
+
+    .category.active,
+    .category:hover {
+      background: #8b5cf6;
+      color: white;
+      border-color: #8b5cf6;
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .service-card {
+      background: #120c20;
+      border: 1px solid #2d2142;
+      border-radius: 16px;
+      padding: 22px;
+      transition: 0.2s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      border-color: #8b5cf6;
+      box-shadow: 0 10px 35px rgba(139, 92, 246, 0.12);
+    }
+
+    .service-icon {
+      font-size: 35px;
+      margin-bottom: 15px;
+    }
+
+    .service-card h3 {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    .service-card p {
+      color: #9e96ac;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .service-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .price {
+      color: #c49aff;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .order-btn {
+      background: #8b5cf6;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 9px;
+      font-weight: bold;
+    }
+
+    .order-btn:hover {
+      background: #7342d9;
+    }
+
+    .orders-section {
+      max-width: 1200px;
+      margin: auto;
+      padding: 10px 5% 70px;
+    }
+
+    .orders-box {
+      background: #120c20;
+      border: 1px solid #2d2142;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .order-item {
+      padding: 18px;
+      border-bottom: 1px solid #2d2142;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .order-item:last-child {
+      border-bottom: none;
+    }
+
+    .order-info h4 {
+      margin-bottom: 6px;
+    }
+
+    .order-info p {
+      color: #948ca0;
+      font-size: 13px;
+    }
+
+    .status {
+      padding: 7px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      background: #241936;
+      color: #c7a8ff;
+      white-space: nowrap;
+    }
+
+    .empty {
+      padding: 30px;
+      text-align: center;
+      color: #938a9f;
+    }
+
+    footer {
+      border-top: 1px solid #2b2045;
+      text-align: center;
+      padding: 25px;
+      color: #756c82;
+      font-size: 14px;
+    }
+
+    /* Modal */
+
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-box {
+      width: 100%;
+      max-width: 520px;
+      background: #120c20;
+      border: 1px solid #3b2859;
+      border-radius: 18px;
+      padding: 25px;
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .close {
+      position: absolute;
+      right: 18px;
+      top: 15px;
+      background: transparent;
+      color: #aaa;
+      font-size: 25px;
+    }
+
+    .modal-box h2 {
+      margin-bottom: 8px;
+    }
+
+    .selected-service {
+      color: #b47cff;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 14px;
+      color: #cfc6da;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 13px;
+      border-radius: 10px;
+      border: 1px solid #392b4f;
+      outline: none;
+      background: #0d0816;
+      color: white;
+      font-size: 14px;
+    }
+
+    .form-group textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .submit-order {
+      width: 100%;
+      padding: 14px;
+      background: #8b5cf6;
+      color: white;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 15px;
+      margin-top: 5px;
+    }
+
+    .submit-order:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .message {
+      margin-top: 12px;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .success {
+      color: #52d273;
+    }
+
+    .error {
+      color: #ff6b6b;
+    }
+
+    @media (max-width: 850px) {
+      .services {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero h1 {
+        font-size: 38px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav {
+        flex-wrap: wrap;
+      }
+
+      .logo {
+        font-size: 21px;
+      }
+
+      .nav-right {
+        width: 100%;
+        justify-content: flex-end;
+      }
+
+      .hero {
+        padding-top: 45px;
+      }
+
+      .hero h1 {
+        font-size: 32px;
+      }
+
+      .services {
+        grid-template-columns: 1fr;
+      }
+
+      .search-box button {
+        padding: 0 16px;
+      }
+
+      .order-item {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+
+    <div class="logo">
+      QuickTask <span>BD</span>
+    </div>
+
+    <div class="nav-right">
+      <button class="nav-btn" onclick="goAdmin()">Admin</button>
+      <button class="nav-btn logout" onclick="logout()">Logout</button>
+    </div>
+
+  </div>
+</header>
+
+
+<section class="hero">
+
+  <h1>
+    Get Things Done <span>Faster.</span>
+  </h1>
+
+  <p>
+    Affordable digital services for everyone in Bangladesh 🇧🇩
+  </p>
+
+  <div class="search-box">
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Search services..."
+      onkeyup="searchServices()"
+    >
+    <button onclick="searchServices()">Search</button>
+  </div>
+
+</section>
+
+
+<section class="section">
+
+  <h2 class="section-title">Browse Services</h2>
+
+  <div class="categories">
+
+    <button class="category active" onclick="filterCategory('All', this)">
+      All
+    </button>
+
+    <button class="category" onclick="filterCategory('Design', this)">
+      🎨 Design
+    </button>
+
+    <button class="category" onclick="filterCategory('Editing', this)">
+      🎬 Editing
+    </button>
+
+    <button class="category" onclick="filterCategory('Writing', this)">
+      ✍️ Writing
+    </button>
+
+    <button class="category" onclick="filterCategory('Social Media', this)">
+      📱 Social Media
+    </button>
+
+  </div>
+
+
+  <div class="services" id="servicesContainer"></div>
+
+</section>
+
+
+<section class="orders-section">
+
+  <h2 class="section-title">My Orders 📦</h2>
+
+  <div class="orders-box" id="ordersContainer">
+    <div class="empty">
+      Loading orders...
+    </div>
+  </div>
+
+</section>
+
+
+<footer>
+  © 2026 QuickTask BD — All Rights Reserved.
+</footer>
+
+
+<!-- ORDER MODAL -->
+
+<div class="modal" id="orderModal">
+
+  <div class="modal-box">
+
+    <button class="close" onclick="closeModal()">×</button>
+
+    <h2>Place Your Order 🚀</h2>
+
+    <div class="selected-service" id="selectedService">
+      Service
+    </div>
+
+    <div class="form-group">
+      <label>Your Name</label>
+
+      <input
+        type="text"
+        id="customerName"
+        placeholder="Enter your name"
+      >
+    </div>
+
+
+    <div class="form-group">
+      <label>Email</label>
+
+      <input
+        type="email"
+        id="customerEmail"
+        placeholder="Enter your email"
+        readonly
+      >
+    </div>
+
+
+    <div class="form-group">
+      <label>Order Details</label>
+
+      <textarea
+        id="orderDetails"
+        placeholder="Explain what you need..."
+      ></textarea>
+    </div>
+
+
+    <button
+      class="submit-order"
+      id="submitOrderBtn"
+      onclick="submitOrder()"
+    >
+      Confirm Order
+    </button>
+
+    <div class="message" id="orderMessage"></div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+  /* ==============================
+     SUPABASE CONFIG
+  ============================== */
+
+  const SUPABASE_URL =
+    "https://xamgccoeerfzmcwmjnms.supabase.co";
+
+  const SUPABASE_KEY =
+    "sb_publishable_7F09Y9Mt87AltPc1cMTl6A_9FrdYlHq";
+
+  const supabaseClient =
+    supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+
+  /* ==============================
+     SERVICES
+  ============================== */
+
+  const services = [
+
+    {
+      id: 1,
+      name: "Logo Design",
+      category: "Design",
+      price: 300,
+      icon: "🎨"
+    },
+
+    {
+      id: 2,
+      name: "Poster Design",
+      category: "Design",
+      price: 250,
+      icon: "🖼️"
+    },
+
+    {
+      id: 3,
+      name: "Short Video Editing",
+      category: "Editing",
+      price: 400,
+      icon: "🎬"
+    },
+
+    {
+      id: 4,
+      name: "Content Writing",
+      category: "Writing",
+      price: 200,
+      icon: "✍️"
+    },
+
+    {
+      id: 5,
+      name: "Instagram Setup",
+      category: "Social Media",
+      price: 350,
+      icon: "📱"
+    },
+
+    {
+      id: 6,
+      name: "Notes Formatting",
+      category: "Writing",
+      price: 150,
+      icon: "📚"
+    },
+
+    {
+      id: 7,
+      name: "Photo Editing",
+      category: "Editing",
+      price: 200,
+      icon: "📸"
+    },
+
+    {
+      id: 8,
+      name: "Social Media Captions",
+      category: "Social Media",
+      price: 100,
+      icon: "💬"
+    },
+
+    {
+      id: 9,
+      name: "CV Writing",
+      category: "Writing",
+      price: 300,
+      icon: "📄"
+    }
+
+  ];
+
+
+  let currentUser = null;
+  let selectedService = null;
+  let currentCategory = "All";
+
+
+  /* ==============================
+     CHECK LOGIN
+  ============================== */
+
+  async function checkLogin() {
+
+    const {
+      data: { session },
+      error
+    } = await supabaseClient.auth.getSession();
+
+    if (error) {
+
+      console.error(error);
+
+      window.location.href = "login.html";
+
+      return;
+    }
+
+    if (!session) {
+
+      window.location.href = "login.html";
+
+      return;
+    }
+
+    currentUser = session.user;
+
+    loadUserInfo();
+
+    renderServices();
+
+    loadOrders();
+  }
+
+
+  /* ==============================
+     USER INFO
+  ============================== */
+
+  function loadUserInfo() {
+
+    const fullName =
+      currentUser.user_metadata?.full_name || "";
+
+    document.getElementById("customerName").value =
+      fullName;
+
+    document.getElementById("customerEmail").value =
+      currentUser.email || "";
+  }
+
+
+  /* ==============================
+     RENDER SERVICES
+  ============================== */
+
+  function renderServices() {
+
+    const container =
+      document.getElementById("servicesContainer");
+
+    const search =
+      document.getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    const filtered =
+      services.filter(service => {
+
+        const categoryMatch =
+          currentCategory === "All" ||
+          service.category === currentCategory;
+
+        const searchMatch =
+          service.name
+            .toLowerCase()
+            .includes(search);
+
+        return categoryMatch && searchMatch;
+
+      });
+
+
+    if (filtered.length === 0) {
+
+      container.innerHTML = `
+        <div class="empty" style="grid-column:1/-1;">
+          No services found 😕
+        </div>
+      `;
+
+      return;
+    }
+
+
+    container.innerHTML =
+      filtered.map(service => `
+
+        <div class="service-card">
+
+          <div class="service-icon">
+            ${service.icon}
+          </div>
+
+          <h3>
+            ${escapeHtml(service.name)}
+          </h3>
+
+          <p>
+            Category: ${escapeHtml(service.category)}
+          </p>
+
+          <div class="service-bottom">
+
+            <div class="price">
+              ৳${service.price}
+            </div>
+
+            <button
+              class="order-btn"
+              onclick="openOrder(${service.id})"
+            >
+              Order Now
+            </button>
+
+          </div>
+
+        </div>
+
+      `).join("");
+  }
+
+
+  /* ==============================
+     SEARCH
+  ============================== */
+
+  function searchServices() {
+
+    renderServices();
+  }
+
+
+  /* ==============================
+     CATEGORY FILTER
+  ============================== */
+
+  function filterCategory(category, button) {
+
+    currentCategory = category;
+
+    document
+      .querySelectorAll(".category")
+      .forEach(btn => {
+
+        btn.classList.remove("active");
+
+      });
+
+    button.classList.add("active");
+
+    renderServices();
+  }
+
+
+  /* ==============================
+     OPEN ORDER MODAL
+  ============================== */
+
+  function openOrder(serviceId) {
+
+    selectedService =
+      services.find(
+        service => service.id === serviceId
+      );
+
+    if (!selectedService) return;
+
+
+    document.getElementById("selectedService")
+      .innerHTML = `
+        ${selectedService.icon}
+        ${escapeHtml(selectedService.name)}
+        — ৳${selectedService.price}
+      `;
+
+
+    document.getElementById("orderDetails").value = "";
+
+    document.getElementById("orderMessage").innerHTML = "";
+
+    document.getElementById("submitOrderBtn").disabled = false;
+
+    document.getElementById("orderModal").style.display = "flex";
+  }
+
+
+  /* ==============================
+     CLOSE MODAL
+  ============================== */
+
+  function closeModal() {
+
+    document.getElementById("orderModal").style.display = "none";
+  }
+
+
+  /* ==============================
+     SUBMIT ORDER
+  ============================== */
+
+  async function submitOrder() {
+
+    if (!currentUser) {
+
+      alert("Please login first.");
+
+      window.location.href = "login.html";
+
+      return;
+    }
+
+
+    if (!selectedService) {
+
+      alert("Please select a service.");
+
+      return;
+    }
+
+
+    const customerName =
+      document.getElementById("customerName")
+        .value
+        .trim();
+
+    const customerEmail =
+      document.getElementById("customerEmail")
+        .value
+        .trim();
+
+    const details =
+      document.getElementById("orderDetails")
+        .value
+        .trim();
+
+
+    const message =
+      document.getElementById("orderMessage");
+
+    const submitBtn =
+      document.getElementById("submitOrderBtn");
+
+
+    if (!customerName) {
+
+      message.className = "message error";
+
+      message.innerText =
+        "Please enter your name.";
+
+      return;
+    }
+
+
+    if (!details) {
+
+      message.className = "message error";
+
+      message.innerText =
+        "Please enter your order details.";
+
+      return;
+    }
+
+
+    submitBtn.disabled = true;
+
+    submitBtn.innerText =
+      "Submitting...";
+
+
+    const { data, error } =
+      await supabaseClient
+        .from("orders")
+        .insert([
+
+          {
+            user_id: currentUser.id,
+
+            service_name:
+              selectedService.name,
+
+            price:
+              selectedService.price,
+
+            customer_name:
+              customerName,
+
+            customer_email:
+              customerEmail,
+
+            details:
+              details,
+
+            status:
+              "Pending"
+
+          }
+
+        ])
+        .select();
+
+
+    if (error) {
+
+      console.error(error);
+
+      message.className =
+        "message error";
+
+      message.innerText =
+        "Order failed: " +
+        error.message;
+
+      submitBtn.disabled = false;
+
+      submitBtn.innerText =
+        "Confirm Order";
+
+      return;
+    }
+
+
+    message.className =
+      "message success";
+
+    message.innerText =
+      "Order placed successfully! 🎉";
+
+
+    submitBtn.innerText =
+      "Order Placed ✓";
+
+
+    await loadOrders();
+
+
+    setTimeout(() => {
+
+      closeModal();
+
+      submitBtn.disabled = false;
+
+      submitBtn.innerText =
+        "Confirm Order";
+
+    }, 1200);
+
+  }
+
+
+  /* ==============================
+     LOAD ORDERS
+  ============================== */
+
+  async function loadOrders() {
+
+    if (!currentUser) return;
+
+
+    const container =
+      document.getElementById("ordersContainer");
+
+
+    const { data, error } =
+      await supabaseClient
+        .from("orders")
+        .select("*")
+        .eq("user_id", currentUser.id)
+        .order("created_at", {
+          ascending: false
+        });
+
+
+    if (error) {
+
+      console.error(error);
+
+      container.innerHTML = `
+        <div class="empty">
+          Could not load orders.
+        </div>
+      `;
+
+      return;
+    }
+
+
+    if (!data || data.length === 0) {
+
+      container.innerHTML = `
+        <div class="empty">
+          You haven't placed any orders yet. 📦
+        </div>
+      `;
+
+      return;
+    }
+
+
+    container.innerHTML =
+      data.map(order => `
+
+        <div class="order-item">
+
+          <div class="order-info">
+
+            <h4>
+              ${escapeHtml(
+                order.service_name || "Service"
+              )}
+            </h4>
+
+            <p>
+              Order ID:
+              ${escapeHtml(String(order.id))}
+            </p>
+
+            <p>
+              Price:
+              ৳${escapeHtml(String(order.price || 0))}
+            </p>
+
+            <p>
+              ${formatDate(order.created_at)}
+            </p>
+
+          </div>
+
+          <div class="status">
+            ${escapeHtml(
+              order.status || "Pending"
+            )}
+          </div>
+
+        </div>
+
+      `).join("");
+  }
+
+
+  /* ==============================
+     ADMIN
+  ============================== */
+
+  function goAdmin() {
+
+    window.location.href =
+      "admin.html";
+  }
+
+
+  /* ==============================
+     LOGOUT
+  ============================== */
+
+  async function logout() {
+
+    const { error } =
+      await supabaseClient.auth.signOut();
+
+
+    if (error) {
+
+      alert(
+        "Logout failed: " +
+        error.message
+      );
+
+      return;
+    }
+
+
+    window.location.href =
+      "login.html";
+  }
+
+
+  /* ==============================
+     ESCAPE HTML
+  ============================== */
+
+  function escapeHtml(value) {
+
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+
+  /* ==============================
+     DATE FORMAT
+  ============================== */
+
+  function formatDate(date) {
+
+    if (!date) return "";
+
+    return new Date(date)
+      .toLocaleString("en-BD", {
+        dateStyle: "medium",
+        timeStyle: "short"
+      });
+  }
+
+
+  /* ==============================
+     CLOSE MODAL ON BACKGROUND CLICK
+  ============================== */
+
+  document
+    .getElementById("orderModal")
+    .addEventListener("click", function(e) {
+
+      if (e.target === this) {
+        closeModal();
+      }
+
+    });
+
+
+  /* ==============================
+     START
+  ============================== */
+
+  checkLogin();
+
+</script>
+
+</body>
+</html>

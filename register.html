@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuickTaskBD - Register</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .box {
+      background: white;
+      width: 350px;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      box-sizing: border-box;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    #message {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="box">
+    <h2>Create Account</h2>
+
+    <input type="text" id="name" placeholder="Full Name">
+
+    <input type="email" id="email" placeholder="Email">
+
+    <input type="password" id="password" placeholder="Password">
+
+    <button onclick="register()">Register</button>
+
+    <div id="message"></div>
+  </div>
+
+  <script>
+    // 🔴 STEP 1: Supabase project URL
+    const SUPABASE_URL = "https://xamgccoeerfzmcwmjnms.supabase.co";
+
+    // 🔴 STEP 2: Supabase Publishable Key
+    const SUPABASE_KEY = "sb_publishable_7F09Y9Mt87AltPc1cMTl6A_9FrdYlHq";
+
+    const { createClient } = supabase;
+
+    const supabaseClient = createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+    async function register() {
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+
+      const message = document.getElementById("message");
+
+      if (!name || !email || !password) {
+        message.innerText = "Please fill in all fields.";
+        message.style.color = "red";
+        return;
+      }
+
+      if (password.length < 6) {
+        message.innerText = "Password must be at least 6 characters.";
+        message.style.color = "red";
+        return;
+      }
+
+      message.innerText = "Creating account...";
+      message.style.color = "blue";
+
+      const { data, error } = await supabaseClient.auth.signUp({
+        email: email,
+        password: password,
+        options: {
+          data: {
+            full_name: name
+          }
+        }
+      });
+
+      if (error) {
+        message.innerText = error.message;
+        message.style.color = "red";
+        return;
+      }
+
+      message.innerText =
+        "Account created successfully! Check your email for verification.";
+
+      message.style.color = "green";
+    }
+  </script>
+
+</body>
+</html>

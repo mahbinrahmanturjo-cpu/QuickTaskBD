@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QuickTask BD - Login</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+body{
+    margin:0;
+    background:#080b12;
+    color:white;
+    font-family:Arial;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+.box{
+    width:90%;
+    max-width:400px;
+    background:#111722;
+    padding:30px;
+    border-radius:15px;
+    border:1px solid #303747;
+}
+
+h1{
+    color:#8b6cff;
+}
+
+input{
+    width:100%;
+    padding:13px;
+    margin:8px 0;
+    box-sizing:border-box;
+    background:#080b12;
+    color:white;
+    border:1px solid #303747;
+    border-radius:8px;
+}
+
+button{
+    width:100%;
+    padding:13px;
+    margin-top:10px;
+    background:#7c5cff;
+    color:white;
+    border:0;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+a{
+    color:#9b83ff;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+<h1>Welcome Back</h1>
+
+<p>Login to QuickTask BD</p>
+
+<input id="email" type="email" placeholder="Your Email">
+
+<input id="password" type="password" placeholder="Password">
+
+<button onclick="login()">
+Login
+</button>
+
+<p>
+Don't have an account?
+<a href="register.html">Create Account</a>
+</p>
+
+</div>
+
+<script>
+
+// 🔴 তোমার register.html-এ যে একই values দিয়েছো,
+// এখানেও EXACT SAME values দিতে হবে.
+
+const SUPABASE_URL = "https://xamgccoeerfzmcwmjnms.supabase.co";
+const SUPABASE_KEY = "sb_publishable_7F09Y9Mt87AltPc1cMTl6A_9FrdYlHq";
+
+const { createClient } = supabase;
+
+const supabaseClient = createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
+async function login(){
+
+    const email =
+        document.getElementById("email").value.trim();
+
+    const password =
+        document.getElementById("password").value;
+
+
+    if(!email || !password){
+
+        alert("Please fill all fields.");
+
+        return;
+    }
+
+
+    const { data, error } =
+        await supabaseClient.auth.signInWithPassword({
+
+            email: email,
+            password: password
+
+        });
+
+
+    if(error){
+
+        alert(error.message);
+
+        return;
+    }
+
+
+    alert("Login successful! 🎉");
+
+
+    window.location.href = "index.html";
+}
+
+</script>
+
+</body>
+</html>
