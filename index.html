@@ -1,12 +1,26 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>QuickTask BD - Get Things Done</title>
-  <meta name="description" content="QuickTask BD - Find affordable digital services in Bangladesh.">
-  <meta name="keywords" content="QuickTask BD, digital services Bangladesh, logo design, poster design, video editing, content writing">
+  <title>QuickTask BD | Affordable Digital Services in Bangladesh</title>
+
+  <meta name="description" content="QuickTask BD is a digital service platform in Bangladesh offering affordable logo design, poster design, video editing, content writing, photo editing, CV writing and social media services.">
+
+  <meta name="keywords" content="QuickTask BD, QuickTask BD Bangladesh, digital services Bangladesh, online services Bangladesh, logo design Bangladesh, poster design, video editing, content writing, photo editing, CV writing, social media services">
+
+  <meta name="author" content="QuickTask BD">
+
+  <meta name="robots" content="index, follow">
+
+  <link rel="canonical" href="https://mahbinrahmanturjo-cpu.github.io/QuickTaskBD/">
+
+  <meta property="og:title" content="QuickTask BD | Affordable Digital Services">
+  <meta property="og:description" content="Affordable digital services for everyone in Bangladesh.">
+  <meta property="og:url" content="https://mahbinrahmanturjo-cpu.github.io/QuickTaskBD/">
+  <meta property="og:type" content="website">
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -16,6 +30,10 @@
       padding: 0;
       box-sizing: border-box;
       font-family: Arial, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
@@ -56,6 +74,7 @@
       display: flex;
       gap: 8px;
       align-items: center;
+      flex-wrap: wrap;
     }
 
     button {
@@ -76,6 +95,15 @@
       background: #2a1948;
     }
 
+    .login-btn {
+      background: #8b5cf6;
+      border-color: #8b5cf6;
+    }
+
+    .register-btn {
+      background: #1b1230;
+    }
+
     .logout {
       background: #e63946;
       border-color: #e63946;
@@ -88,14 +116,25 @@
     .hero {
       max-width: 1200px;
       margin: auto;
-      padding: 70px 5% 45px;
+      padding: 75px 5% 50px;
       text-align: center;
     }
 
+    .hero-badge {
+      display: inline-block;
+      background: #171027;
+      border: 1px solid #39255c;
+      color: #c8a8ff;
+      padding: 8px 14px;
+      border-radius: 30px;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
     .hero h1 {
-      font-size: 48px;
+      font-size: 50px;
       line-height: 1.15;
-      margin-bottom: 15px;
+      margin-bottom: 16px;
     }
 
     .hero h1 span {
@@ -104,8 +143,36 @@
 
     .hero p {
       color: #b9b1c9;
-      font-size: 17px;
-      margin-bottom: 28px;
+      font-size: 18px;
+      line-height: 1.6;
+      margin: 0 auto 28px;
+      max-width: 700px;
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 35px;
+      flex-wrap: wrap;
+    }
+
+    .hero-btn {
+      padding: 13px 22px;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    .primary {
+      background: #8b5cf6;
+      color: white;
+    }
+
+    .secondary {
+      background: #171027;
+      color: white;
+      border: 1px solid #39255c;
     }
 
     .search-box {
@@ -144,6 +211,13 @@
     .section-title {
       font-size: 28px;
       margin-bottom: 20px;
+    }
+
+    .section-description {
+      color: #a8a0b5;
+      margin-top: -10px;
+      margin-bottom: 25px;
+      line-height: 1.6;
     }
 
     .categories {
@@ -279,6 +353,29 @@
       color: #938a9f;
     }
 
+    .seo-info {
+      max-width: 900px;
+      margin: 0 auto 50px;
+      padding: 0 5%;
+    }
+
+    .seo-box {
+      background: #120c20;
+      border: 1px solid #2d2142;
+      border-radius: 16px;
+      padding: 25px;
+    }
+
+    .seo-box h2 {
+      margin-bottom: 12px;
+    }
+
+    .seo-box p {
+      color: #aaa2b5;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
     footer {
       border-top: 1px solid #2b2045;
       text-align: center;
@@ -286,8 +383,6 @@
       color: #756c82;
       font-size: 14px;
     }
-
-    /* Modal */
 
     .modal {
       display: none;
@@ -445,9 +540,20 @@
       QuickTask <span>BD</span>
     </div>
 
-    <div class="nav-right">
-      <button class="nav-btn" onclick="goAdmin()">Admin</button>
-      <button class="nav-btn logout" onclick="logout()">Logout</button>
+    <div class="nav-right" id="navButtons">
+
+      <button class="nav-btn login-btn" onclick="goLogin()">
+        Login
+      </button>
+
+      <button class="nav-btn register-btn" onclick="goRegister()">
+        Register
+      </button>
+
+      <button class="nav-btn" onclick="goAdmin()">
+        Admin
+      </button>
+
     </div>
 
   </div>
@@ -456,30 +562,60 @@
 
 <section class="hero">
 
+  <div class="hero-badge">
+    🇧🇩 Digital Services in Bangladesh
+  </div>
+
   <h1>
-    Get Things Done <span>Faster.</span>
+    QuickTask BD — Get Things Done <span>Faster.</span>
   </h1>
 
   <p>
-    Affordable digital services for everyone in Bangladesh 🇧🇩
+    QuickTask BD is an affordable digital service platform in Bangladesh.
+    Get logo design, poster design, video editing, content writing,
+    photo editing, CV writing and social media services easily.
   </p>
 
+  <div class="hero-actions">
+
+    <button class="hero-btn primary" onclick="scrollToServices()">
+      Explore Services
+    </button>
+
+    <button class="hero-btn secondary" onclick="goRegister()">
+      Create Account
+    </button>
+
+  </div>
+
   <div class="search-box">
+
     <input
       type="text"
       id="searchInput"
-      placeholder="Search services..."
+      placeholder="Search digital services..."
       onkeyup="searchServices()"
     >
-    <button onclick="searchServices()">Search</button>
+
+    <button onclick="searchServices()">
+      Search
+    </button>
+
   </div>
 
 </section>
 
 
-<section class="section">
+<section class="section" id="servicesSection">
 
-  <h2 class="section-title">Browse Services</h2>
+  <h2 class="section-title">
+    Affordable Digital Services in Bangladesh
+  </h2>
+
+  <p class="section-description">
+    Choose from affordable digital services including design, editing,
+    writing and social media services. Create an account to place an order.
+  </p>
 
   <div class="categories">
 
@@ -505,15 +641,34 @@
 
   </div>
 
-
   <div class="services" id="servicesContainer"></div>
 
 </section>
 
 
-<section class="orders-section">
+<section class="seo-info">
 
-  <h2 class="section-title">My Orders 📦</h2>
+  <div class="seo-box">
+
+    <h2>Why Choose QuickTask BD?</h2>
+
+    <p>
+      QuickTask BD helps customers in Bangladesh find affordable digital
+      services in one place. Whether you need a logo, poster, short video,
+      photo editing, content writing, CV writing or social media support,
+      QuickTask BD makes it simple to find a service and place an order.
+    </p>
+
+  </div>
+
+</section>
+
+
+<section class="orders-section" id="ordersSection" style="display:none;">
+
+  <h2 class="section-title">
+    My Orders 📦
+  </h2>
 
   <div class="orders-box" id="ordersContainer">
     <div class="empty">
@@ -529,8 +684,6 @@
 </footer>
 
 
-<!-- ORDER MODAL -->
-
 <div class="modal" id="orderModal">
 
   <div class="modal-box">
@@ -544,6 +697,7 @@
     </div>
 
     <div class="form-group">
+
       <label>Your Name</label>
 
       <input
@@ -551,10 +705,11 @@
         id="customerName"
         placeholder="Enter your name"
       >
+
     </div>
 
-
     <div class="form-group">
+
       <label>Email</label>
 
       <input
@@ -563,18 +718,19 @@
         placeholder="Enter your email"
         readonly
       >
+
     </div>
 
-
     <div class="form-group">
+
       <label>Order Details</label>
 
       <textarea
         id="orderDetails"
         placeholder="Explain what you need..."
       ></textarea>
-    </div>
 
+    </div>
 
     <button
       class="submit-order"
@@ -593,10 +749,6 @@
 
 <script>
 
-  /* ==============================
-     SUPABASE CONFIG
-  ============================== */
-
   const SUPABASE_URL =
     "https://xamgccoeerfzmcwmjnms.supabase.co";
 
@@ -609,10 +761,6 @@
       SUPABASE_KEY
     );
 
-
-  /* ==============================
-     SERVICES
-  ============================== */
 
   const services = [
 
@@ -696,48 +844,76 @@
   let currentCategory = "All";
 
 
-  /* ==============================
-     CHECK LOGIN
-  ============================== */
-
   async function checkLogin() {
 
     const {
-      data: { session },
-      error
+      data: { session }
     } = await supabaseClient.auth.getSession();
 
-    if (error) {
+    currentUser = session ? session.user : null;
 
-      console.error(error);
-
-      window.location.href = "login.html";
-
-      return;
-    }
-
-    if (!session) {
-
-      window.location.href = "login.html";
-
-      return;
-    }
-
-    currentUser = session.user;
-
-    loadUserInfo();
+    updateNavigation();
 
     renderServices();
 
-    loadOrders();
+    if (currentUser) {
+
+      loadUserInfo();
+
+      document.getElementById("ordersSection").style.display = "block";
+
+      loadOrders();
+
+    }
+
   }
 
 
-  /* ==============================
-     USER INFO
-  ============================== */
+  function updateNavigation() {
+
+    const nav =
+      document.getElementById("navButtons");
+
+    if (currentUser) {
+
+      nav.innerHTML = `
+
+        <button class="nav-btn" onclick="goAdmin()">
+          Admin
+        </button>
+
+        <button class="nav-btn logout" onclick="logout()">
+          Logout
+        </button>
+
+      `;
+
+    } else {
+
+      nav.innerHTML = `
+
+        <button class="nav-btn login-btn" onclick="goLogin()">
+          Login
+        </button>
+
+        <button class="nav-btn register-btn" onclick="goRegister()">
+          Register
+        </button>
+
+        <button class="nav-btn" onclick="goAdmin()">
+          Admin
+        </button>
+
+      `;
+
+    }
+
+  }
+
 
   function loadUserInfo() {
+
+    if (!currentUser) return;
 
     const fullName =
       currentUser.user_metadata?.full_name || "";
@@ -747,12 +923,9 @@
 
     document.getElementById("customerEmail").value =
       currentUser.email || "";
+
   }
 
-
-  /* ==============================
-     RENDER SERVICES
-  ============================== */
 
   function renderServices() {
 
@@ -830,22 +1003,16 @@
         </div>
 
       `).join("");
+
   }
 
-
-  /* ==============================
-     SEARCH
-  ============================== */
 
   function searchServices() {
 
     renderServices();
+
   }
 
-
-  /* ==============================
-     CATEGORY FILTER
-  ============================== */
 
   function filterCategory(category, button) {
 
@@ -862,14 +1029,22 @@
     button.classList.add("active");
 
     renderServices();
+
   }
 
 
-  /* ==============================
-     OPEN ORDER MODAL
-  ============================== */
-
   function openOrder(serviceId) {
+
+    if (!currentUser) {
+
+      alert("Please login or create an account to place an order.");
+
+      window.location.href = "login.html";
+
+      return;
+
+    }
+
 
     selectedService =
       services.find(
@@ -893,33 +1068,28 @@
 
     document.getElementById("submitOrderBtn").disabled = false;
 
+    loadUserInfo();
+
     document.getElementById("orderModal").style.display = "flex";
+
   }
 
-
-  /* ==============================
-     CLOSE MODAL
-  ============================== */
 
   function closeModal() {
 
     document.getElementById("orderModal").style.display = "none";
+
   }
 
-
-  /* ==============================
-     SUBMIT ORDER
-  ============================== */
 
   async function submitOrder() {
 
     if (!currentUser) {
 
-      alert("Please login first.");
-
       window.location.href = "login.html";
 
       return;
+
     }
 
 
@@ -928,6 +1098,7 @@
       alert("Please select a service.");
 
       return;
+
     }
 
 
@@ -962,6 +1133,7 @@
         "Please enter your name.";
 
       return;
+
     }
 
 
@@ -973,6 +1145,7 @@
         "Please enter your order details.";
 
       return;
+
     }
 
 
@@ -982,7 +1155,7 @@
       "Submitting...";
 
 
-    const { data, error } =
+    const { error } =
       await supabaseClient
         .from("orders")
         .insert([
@@ -1007,11 +1180,9 @@
 
             status:
               "Pending"
-
           }
 
-        ])
-        .select();
+        ]);
 
 
     if (error) {
@@ -1031,6 +1202,7 @@
         "Confirm Order";
 
       return;
+
     }
 
 
@@ -1062,10 +1234,6 @@
   }
 
 
-  /* ==============================
-     LOAD ORDERS
-  ============================== */
-
   async function loadOrders() {
 
     if (!currentUser) return;
@@ -1096,6 +1264,7 @@
       `;
 
       return;
+
     }
 
 
@@ -1108,6 +1277,7 @@
       `;
 
       return;
+
     }
 
 
@@ -1149,23 +1319,44 @@
         </div>
 
       `).join("");
+
   }
 
-
-  /* ==============================
-     ADMIN
-  ============================== */
 
   function goAdmin() {
 
     window.location.href =
       "admin.html";
+
   }
 
 
-  /* ==============================
-     LOGOUT
-  ============================== */
+  function goLogin() {
+
+    window.location.href =
+      "login.html";
+
+  }
+
+
+  function goRegister() {
+
+    window.location.href =
+      "register.html";
+
+  }
+
+
+  function scrollToServices() {
+
+    document
+      .getElementById("servicesSection")
+      .scrollIntoView({
+        behavior: "smooth"
+      });
+
+  }
+
 
   async function logout() {
 
@@ -1181,17 +1372,14 @@
       );
 
       return;
+
     }
 
 
-    window.location.href =
-      "login.html";
+    window.location.reload();
+
   }
 
-
-  /* ==============================
-     ESCAPE HTML
-  ============================== */
 
   function escapeHtml(value) {
 
@@ -1201,12 +1389,9 @@
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;")
       .replace(/'/g, "&#039;");
+
   }
 
-
-  /* ==============================
-     DATE FORMAT
-  ============================== */
 
   function formatDate(date) {
 
@@ -1217,27 +1402,22 @@
         dateStyle: "medium",
         timeStyle: "short"
       });
+
   }
 
-
-  /* ==============================
-     CLOSE MODAL ON BACKGROUND CLICK
-  ============================== */
 
   document
     .getElementById("orderModal")
     .addEventListener("click", function(e) {
 
       if (e.target === this) {
+
         closeModal();
+
       }
 
     });
 
-
-  /* ==============================
-     START
-  ============================== */
 
   checkLogin();
 
@@ -1245,3 +1425,4 @@
 
 </body>
 </html>
+```
