@@ -3,7 +3,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>QuickTask BD | Affordable Digital Services in Bangladesh</title>
@@ -27,6 +26,10 @@
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
@@ -55,6 +58,7 @@
 
     nav {
       display: flex;
+      align-items: center;
       gap: 8px;
       flex-wrap: wrap;
       justify-content: center;
@@ -87,6 +91,16 @@
       font-weight: 700;
     }
 
+    .admin-btn {
+      background: #7c3aed !important;
+      font-weight: 700;
+    }
+
+    .logout-btn {
+      background: #ef4444 !important;
+      font-weight: 700;
+    }
+
     .hero {
       padding: 75px 6% 60px;
       text-align: center;
@@ -104,7 +118,7 @@
     }
 
     .hero p {
-      max-width: 750px;
+      max-width: 760px;
       margin: auto;
       line-height: 1.7;
       color: #dbeafe;
@@ -119,13 +133,10 @@
       flex-wrap: wrap;
     }
 
-    .hero-buttons a,
-    .hero-buttons button {
+    .hero-buttons a {
       padding: 13px 22px;
       border-radius: 10px;
-      border: none;
       text-decoration: none;
-      cursor: pointer;
       font-weight: 700;
       font-size: 15px;
     }
@@ -176,6 +187,7 @@
     .member-box p {
       color: #64748b;
       margin-bottom: 20px;
+      line-height: 1.6;
     }
 
     .member-actions {
@@ -185,13 +197,10 @@
       flex-wrap: wrap;
     }
 
-    .member-actions a,
-    .member-actions button {
+    .member-actions a {
       padding: 11px 20px;
       border-radius: 9px;
       text-decoration: none;
-      border: none;
-      cursor: pointer;
       font-weight: 700;
     }
 
@@ -203,11 +212,6 @@
     .blue {
       background: #2563eb;
       color: white;
-    }
-
-    .gray {
-      background: #e5e7eb;
-      color: #111827;
     }
 
     .filters {
@@ -298,6 +302,7 @@
 
     .orders-section {
       display: none;
+      margin-top: 50px;
     }
 
     .order-card {
@@ -308,9 +313,70 @@
       box-shadow: 0 5px 18px rgba(0,0,0,.05);
     }
 
+    .status {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 5px 10px;
+      border-radius: 20px;
+      background: #fef3c7;
+      color: #92400e;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
     .seo-text {
       line-height: 1.8;
       color: #475569;
+    }
+
+    .payment-section {
+      margin-top: 50px;
+    }
+
+    .payment-box {
+      background: white;
+      border-radius: 18px;
+      padding: 30px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.06);
+      text-align: center;
+    }
+
+    .payment-box > p {
+      color: #64748b;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .payment-methods {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+
+    .payment-method {
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .payment-method h3 {
+      margin-bottom: 7px;
+    }
+
+    .payment-method p {
+      color: #64748b;
+      font-size: 14px;
+    }
+
+    .coming {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 5px 10px;
+      border-radius: 20px;
+      background: #e0f2fe;
+      color: #0369a1;
+      font-size: 12px;
+      font-weight: 700;
     }
 
     footer {
@@ -330,12 +396,13 @@
       align-items: center;
       justify-content: center;
       padding: 20px;
+      overflow-y: auto;
     }
 
     .modal-box {
       background: white;
       width: 100%;
-      max-width: 500px;
+      max-width: 520px;
       border-radius: 15px;
       padding: 25px;
     }
@@ -362,6 +429,16 @@
     .modal-box textarea {
       min-height: 100px;
       resize: vertical;
+    }
+
+    .payment-note {
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 9px;
+      background: #f0f9ff;
+      color: #075985;
+      font-size: 13px;
+      line-height: 1.5;
     }
 
     .modal-actions {
@@ -399,14 +476,14 @@
       color: #cbd5e1;
     }
 
-    .logout-btn {
-      background: #ef4444 !important;
-      font-weight: 700;
-    }
-
     @media (max-width: 850px) {
+
       .services {
         grid-template-columns: repeat(2, 1fr);
+      }
+
+      .payment-methods {
+        grid-template-columns: 1fr;
       }
 
       .hero h1 {
@@ -415,6 +492,7 @@
     }
 
     @media (max-width: 600px) {
+
       header {
         flex-direction: column;
       }
@@ -439,6 +517,11 @@
       nav a {
         font-size: 13px;
       }
+
+      .user-area {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
     }
   </style>
 </head>
@@ -455,6 +538,8 @@
 
     <a href="#about">About</a>
 
+    <a href="#payment">Payment</a>
+
     <a href="register.html" class="signup-btn">
       Join as Member
     </a>
@@ -463,20 +548,35 @@
       Login
     </a>
 
-    <button id="adminBtn" style="display:none;">
+    <button
+      id="adminBtn"
+      class="admin-btn"
+      style="display:none;"
+    >
       Admin
     </button>
 
-    <div class="user-area" id="userArea">
-      <span class="user-email" id="userEmail"></span>
+    <div
+      class="user-area"
+      id="userArea"
+    >
+
+      <span
+        class="user-email"
+        id="userEmail"
+      ></span>
 
       <button onclick="scrollToOrders()">
         My Orders
       </button>
 
-      <button class="logout-btn" onclick="logout()">
+      <button
+        class="logout-btn"
+        onclick="logout()"
+      >
         Logout
       </button>
+
     </div>
 
   </nav>
@@ -499,11 +599,17 @@
 
   <div class="hero-buttons">
 
-    <a href="register.html" class="join-btn">
+    <a
+      href="register.html"
+      class="join-btn"
+    >
       🚀 Join as a Member
     </a>
 
-    <a href="login.html" class="hero-login">
+    <a
+      href="login.html"
+      class="hero-login"
+    >
       🔐 Already a Member? Login
     </a>
 
@@ -514,22 +620,31 @@
 
 <main class="section">
 
+
+  <!-- MEMBER -->
+
   <div class="member-box">
 
     <h2>👤 Join QuickTask BD</h2>
 
     <p>
-      Member account create kore available services browse koro
-      ebong nijer order submit koro.
+      Free member account create kore services browse koro,
+      order submit koro ebong nijer order status track koro.
     </p>
 
     <div class="member-actions">
 
-      <a href="register.html" class="green">
+      <a
+        href="register.html"
+        class="green"
+      >
         Create Free Account
       </a>
 
-      <a href="login.html" class="blue">
+      <a
+        href="login.html"
+        class="blue"
+      >
         Login
       </a>
 
@@ -537,6 +652,8 @@
 
   </div>
 
+
+  <!-- SERVICES -->
 
   <div id="services">
 
@@ -565,35 +682,54 @@
 
     <div class="filters">
 
-      <button class="active" onclick="setCategory('All', this)">
+      <button
+        class="active"
+        onclick="setCategory('All', this)"
+      >
         All
       </button>
 
-      <button onclick="setCategory('Design', this)">
+      <button
+        onclick="setCategory('Design', this)"
+      >
         Design
       </button>
 
-      <button onclick="setCategory('Editing', this)">
+      <button
+        onclick="setCategory('Editing', this)"
+      >
         Editing
       </button>
 
-      <button onclick="setCategory('Writing', this)">
+      <button
+        onclick="setCategory('Writing', this)"
+      >
         Writing
       </button>
 
-      <button onclick="setCategory('Social Media', this)">
+      <button
+        onclick="setCategory('Social Media', this)"
+      >
         Social Media
       </button>
 
     </div>
 
 
-    <div class="services" id="serviceContainer"></div>
+    <div
+      class="services"
+      id="serviceContainer"
+    ></div>
 
   </div>
 
 
-  <section id="about" style="margin-top:55px;">
+  <!-- ABOUT -->
+
+  <section
+    id="about"
+    style="margin-top:55px;"
+  >
 
     <div class="section-title">
 
@@ -630,13 +766,102 @@
   </section>
 
 
-  <section class="orders-section" id="ordersSection">
+  <!-- PAYMENT -->
+
+  <section
+    id="payment"
+    class="payment-section"
+  >
+
+    <div class="section-title">
+
+      <h2>💳 Payment Methods</h2>
+
+      <p>
+        Payment options will be available soon.
+      </p>
+
+    </div>
+
+
+    <div class="payment-box">
+
+      <p>
+        Currently, payment accounts are being prepared.
+        You can still place your order. After order confirmation,
+        payment instructions will be provided.
+      </p>
+
+
+      <div class="payment-methods">
+
+
+        <div class="payment-method">
+
+          <h3>📱 bKash</h3>
+
+          <p>
+            Mobile payment option
+          </p>
+
+          <span class="coming">
+            Coming Soon
+          </span>
+
+        </div>
+
+
+        <div class="payment-method">
+
+          <h3>📱 Nagad</h3>
+
+          <p>
+            Mobile payment option
+          </p>
+
+          <span class="coming">
+            Coming Soon
+          </span>
+
+        </div>
+
+
+        <div class="payment-method">
+
+          <h3>📱 Rocket</h3>
+
+          <p>
+            Mobile payment option
+          </p>
+
+          <span class="coming">
+            Coming Soon
+          </span>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- MY ORDERS -->
+
+  <section
+    class="orders-section"
+    id="ordersSection"
+  >
 
     <div class="section-title">
 
       <h2>📦 My Orders</h2>
 
-      <p>Your submitted orders will appear here.</p>
+      <p>
+        Your submitted orders will appear here.
+      </p>
 
     </div>
 
@@ -649,7 +874,9 @@
 
 <footer>
 
-  <p>© 2026 QuickTask BD. All rights reserved.</p>
+  <p>
+    © 2026 QuickTask BD. All rights reserved.
+  </p>
 
   <p style="margin-top:7px;">
     Affordable Digital Services in Bangladesh
@@ -660,21 +887,33 @@
 
 <!-- ORDER MODAL -->
 
-<div class="modal" id="orderModal">
+<div
+  class="modal"
+  id="orderModal"
+>
 
   <div class="modal-box">
 
-    <h2>Place Your Order</h2>
+    <h2>🛒 Place Your Order</h2>
 
     <form id="orderForm">
 
-      <input type="hidden" id="serviceName">
+      <input
+        type="hidden"
+        id="serviceName"
+      >
 
-      <input type="hidden" id="servicePrice">
+      <input
+        type="hidden"
+        id="servicePrice"
+      >
 
-      <p id="selectedService"
-         style="margin-bottom:15px;font-weight:700;color:#2563eb;">
-      </p>
+
+      <p
+        id="selectedService"
+        style="margin-bottom:15px;font-weight:700;color:#2563eb;"
+      ></p>
+
 
       <label>Your Name</label>
 
@@ -685,6 +924,7 @@
         placeholder="Enter your name"
       >
 
+
       <label>Your Email</label>
 
       <input
@@ -694,13 +934,25 @@
         placeholder="Enter your email"
       >
 
+
       <label>Order Details</label>
 
       <textarea
         id="orderDetails"
         required
-        placeholder="Describe what you need..."
+        placeholder="Describe exactly what you need..."
       ></textarea>
+
+
+      <div class="payment-note">
+
+        💳 <strong>Payment:</strong>
+        Payment methods are currently being prepared.
+        After your order is confirmed, payment instructions
+        will be provided.
+
+      </div>
+
 
       <div class="modal-actions">
 
@@ -730,6 +982,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+
 <script>
 
   /* =========================
@@ -739,8 +992,10 @@
   const SUPABASE_URL =
     "https://xamgccoeerfzmcwmjnms.supabase.co";
 
+
   const SUPABASE_KEY =
     "sb_publishable_7F09Y9Mt87AltPc1cMTl6A_9FrdYlHq";
+
 
   const supabaseClient =
     window.supabase.createClient(
@@ -822,14 +1077,19 @@
   function renderServices() {
 
     const container =
-      document.getElementById("serviceContainer");
+      document.getElementById(
+        "serviceContainer"
+      );
+
 
     const search =
-      document.getElementById("searchInput")
-        .value
-        .toLowerCase();
+      document.getElementById(
+        "searchInput"
+      ).value.toLowerCase();
+
 
     container.innerHTML = "";
+
 
     services.forEach(service => {
 
@@ -837,22 +1097,40 @@
         currentCategory === "All" ||
         service.category === currentCategory;
 
-      const searchMatch =
-        service.name.toLowerCase().includes(search) ||
-        service.category.toLowerCase().includes(search);
 
-      if (!categoryMatch || !searchMatch) {
+      const searchMatch =
+        service.name
+          .toLowerCase()
+          .includes(search) ||
+
+        service.category
+          .toLowerCase()
+          .includes(search);
+
+
+      if (
+        !categoryMatch ||
+        !searchMatch
+      ) {
         return;
       }
 
-      const card =
-        document.createElement("div");
 
-      card.className = "service-card";
+      const card =
+        document.createElement(
+          "div"
+        );
+
+
+      card.className =
+        "service-card";
+
 
       card.innerHTML = `
 
-        <h3>${service.name}</h3>
+        <h3>
+          ${service.name}
+        </h3>
 
         <div class="category">
           ${service.category}
@@ -871,24 +1149,42 @@
 
       `;
 
-      container.appendChild(card);
+
+      container.appendChild(
+        card
+      );
 
     });
 
   }
 
 
-  function setCategory(category, button) {
+  function setCategory(
+    category,
+    button
+  ) {
 
-    currentCategory = category;
+    currentCategory =
+      category;
+
 
     document
-      .querySelectorAll(".filters button")
+      .querySelectorAll(
+        ".filters button"
+      )
       .forEach(btn => {
-        btn.classList.remove("active");
+
+        btn.classList.remove(
+          "active"
+        );
+
       });
 
-    button.classList.add("active");
+
+    button.classList.add(
+      "active"
+    );
+
 
     renderServices();
 
@@ -896,7 +1192,9 @@
 
 
   function filterServices() {
+
     renderServices();
+
   }
 
 
@@ -907,35 +1205,54 @@
   async function checkUser() {
 
     const {
-      data: { session }
-    } = await supabaseClient.auth.getSession();
+      data: {
+        session
+      }
+    } =
+      await supabaseClient
+        .auth
+        .getSession();
 
 
-    if (session) {
-
-      document
-        .getElementById("userArea")
-        .style.display = "flex";
-
-
-      document
-        .getElementById("userEmail")
-        .textContent =
-        session.user.email;
-
-
-      document
-        .querySelectorAll(".signup-btn, .login-btn")
-        .forEach(btn => {
-          btn.style.display = "none";
-        });
-
-
-      await checkAdmin(session.user.id);
-
-      await loadOrders();
-
+    if (!session) {
+      return;
     }
+
+
+    document
+      .getElementById(
+        "userArea"
+      )
+      .style.display =
+      "flex";
+
+
+    document
+      .getElementById(
+        "userEmail"
+      )
+      .textContent =
+      session.user.email;
+
+
+    document
+      .querySelectorAll(
+        ".signup-btn, .login-btn"
+      )
+      .forEach(btn => {
+
+        btn.style.display =
+          "none";
+
+      });
+
+
+    await checkAdmin(
+      session.user.id
+    );
+
+
+    await loadOrders();
 
   }
 
@@ -944,27 +1261,44 @@
      ADMIN CHECK
   ========================= */
 
-  async function checkAdmin(userId) {
+  async function checkAdmin(
+    userId
+  ) {
 
     const {
       data,
       error
-    } = await supabaseClient
-      .from("admin_users")
-      .select("user_id")
-      .eq("user_id", userId)
-      .maybeSingle();
+    } =
+      await supabaseClient
+        .from("admin_users")
+        .select("user_id")
+        .eq(
+          "user_id",
+          userId
+        )
+        .maybeSingle();
 
 
-    if (!error && data) {
+    if (
+      !error &&
+      data
+    ) {
 
       const adminBtn =
-        document.getElementById("adminBtn");
+        document.getElementById(
+          "adminBtn"
+        );
 
-      adminBtn.style.display = "inline-block";
+
+      adminBtn.style.display =
+        "inline-block";
+
 
       adminBtn.onclick = () => {
-        window.location.href = "admin.html";
+
+        window.location.href =
+          "admin.html";
+
       };
 
     }
@@ -976,11 +1310,19 @@
      OPEN ORDER
   ========================= */
 
-  async function openOrder(serviceName, price) {
+  async function openOrder(
+    serviceName,
+    price
+  ) {
 
     const {
-      data: { session }
-    } = await supabaseClient.auth.getSession();
+      data: {
+        session
+      }
+    } =
+      await supabaseClient
+        .auth
+        .getSession();
 
 
     if (!session) {
@@ -989,7 +1331,10 @@
         "Please create a member account or login first. 🙂"
       );
 
-      window.location.href = "login.html";
+
+      window.location.href =
+        "login.html";
+
 
       return;
 
@@ -997,30 +1342,43 @@
 
 
     document
-      .getElementById("serviceName")
-      .value = serviceName;
+      .getElementById(
+        "serviceName"
+      )
+      .value =
+      serviceName;
 
 
     document
-      .getElementById("servicePrice")
-      .value = price;
+      .getElementById(
+        "servicePrice"
+      )
+      .value =
+      price;
 
 
     document
-      .getElementById("selectedService")
+      .getElementById(
+        "selectedService"
+      )
       .textContent =
       `${serviceName} — ৳${price}`;
 
 
     document
-      .getElementById("customerEmail")
+      .getElementById(
+        "customerEmail"
+      )
       .value =
       session.user.email || "";
 
 
     document
-      .getElementById("orderModal")
-      .style.display = "flex";
+      .getElementById(
+        "orderModal"
+      )
+      .style.display =
+      "flex";
 
   }
 
@@ -1028,8 +1386,11 @@
   function closeOrderModal() {
 
     document
-      .getElementById("orderModal")
-      .style.display = "none";
+      .getElementById(
+        "orderModal"
+      )
+      .style.display =
+      "none";
 
   }
 
@@ -1039,98 +1400,153 @@
   ========================= */
 
   document
-    .getElementById("orderForm")
-    .addEventListener("submit", async function(e) {
+    .getElementById(
+      "orderForm"
+    )
+    .addEventListener(
+      "submit",
+      async function(e) {
 
-      e.preventDefault();
-
-
-      const {
-        data: { session }
-      } = await supabaseClient.auth.getSession();
-
-
-      if (!session) {
-
-        alert("Please login first.");
-
-        window.location.href = "login.html";
-
-        return;
-
-      }
+        e.preventDefault();
 
 
-      const serviceName =
-        document.getElementById("serviceName").value;
-
-      const servicePrice =
-        Number(
-          document.getElementById("servicePrice").value
-        );
-
-      const customerName =
-        document.getElementById("customerName").value;
-
-      const customerEmail =
-        document.getElementById("customerEmail").value;
-
-      const details =
-        document.getElementById("orderDetails").value;
+        const {
+          data: {
+            session
+          }
+        } =
+          await supabaseClient
+            .auth
+            .getSession();
 
 
-      const { error } =
-        await supabaseClient
-          .from("orders")
-          .insert({
+        if (!session) {
 
-            user_id: session.user.id,
-
-            service_name: serviceName,
-
-            price: servicePrice,
-
-            customer_name: customerName,
-
-            customer_email: customerEmail,
-
-            details: details,
-
-            status: "Pending"
-
-          });
+          alert(
+            "Please login first."
+          );
 
 
-      if (error) {
+          window.location.href =
+            "login.html";
 
-        console.error(error);
+
+          return;
+
+        }
+
+
+        const serviceName =
+          document
+            .getElementById(
+              "serviceName"
+            )
+            .value;
+
+
+        const servicePrice =
+          Number(
+            document
+              .getElementById(
+                "servicePrice"
+              )
+              .value
+          );
+
+
+        const customerName =
+          document
+            .getElementById(
+              "customerName"
+            )
+            .value;
+
+
+        const customerEmail =
+          document
+            .getElementById(
+              "customerEmail"
+            )
+            .value;
+
+
+        const details =
+          document
+            .getElementById(
+              "orderDetails"
+            )
+            .value;
+
+
+        const {
+          error
+        } =
+          await supabaseClient
+            .from("orders")
+            .insert({
+
+              user_id:
+                session.user.id,
+
+              service_name:
+                serviceName,
+
+              price:
+                servicePrice,
+
+              customer_name:
+                customerName,
+
+              customer_email:
+                customerEmail,
+
+              details:
+                details,
+
+              status:
+                "Pending"
+
+            });
+
+
+        if (error) {
+
+          console.error(
+            error
+          );
+
+
+          alert(
+            "Order submit failed. Please try again."
+          );
+
+
+          return;
+
+        }
+
 
         alert(
-          "Order submit failed. Please try again."
+          "Order submitted successfully! ✅"
         );
 
-        return;
 
-      }
-
-
-      alert(
-        "Order submitted successfully! ✅"
-      );
+        closeOrderModal();
 
 
-      closeOrderModal();
+        document
+          .getElementById(
+            "orderForm"
+          )
+          .reset();
 
-      document
-        .getElementById("orderForm")
-        .reset();
+
+        await loadOrders();
 
 
-      await loadOrders();
+        scrollToOrders();
 
-      scrollToOrders();
-
-    });
+      });
 
 
   /* =========================
@@ -1140,26 +1556,44 @@
   async function loadOrders() {
 
     const {
-      data: { session }
-    } = await supabaseClient.auth.getSession();
+      data: {
+        session
+      }
+    } =
+      await supabaseClient
+        .auth
+        .getSession();
 
 
-    if (!session) return;
+    if (!session) {
+      return;
+    }
 
 
-    const { data, error } =
+    const {
+      data,
+      error
+    } =
       await supabaseClient
         .from("orders")
         .select("*")
-        .eq("user_id", session.user.id)
-        .order("created_at", {
-          ascending: false
-        });
+        .eq(
+          "user_id",
+          session.user.id
+        )
+        .order(
+          "created_at",
+          {
+            ascending: false
+          }
+        );
 
 
     if (error) {
 
-      console.error(error);
+      console.error(
+        error
+      );
 
       return;
 
@@ -1167,18 +1601,28 @@
 
 
     const section =
-      document.getElementById("ordersSection");
+      document.getElementById(
+        "ordersSection"
+      );
+
 
     const container =
-      document.getElementById("ordersContainer");
+      document.getElementById(
+        "ordersContainer"
+      );
 
 
-    section.style.display = "block";
+    section.style.display =
+      "block";
+
 
     container.innerHTML = "";
 
 
-    if (!data || data.length === 0) {
+    if (
+      !data ||
+      data.length === 0
+    ) {
 
       container.innerHTML = `
 
@@ -1200,9 +1644,14 @@
     data.forEach(order => {
 
       const card =
-        document.createElement("div");
+        document.createElement(
+          "div"
+        );
 
-      card.className = "order-card";
+
+      card.className =
+        "order-card";
+
 
       card.innerHTML = `
 
@@ -1211,25 +1660,27 @@
         </h3>
 
         <p style="margin-top:7px;">
-          Price: <strong>
+          Price:
+          <strong>
             ৳${order.price || 0}
           </strong>
         </p>
 
         <p style="margin-top:7px;">
-          Status:
-          <strong>
-            ${order.status || "Pending"}
-          </strong>
-        </p>
-
-        <p style="margin-top:7px;color:#64748b;">
+          Order Details:
           ${order.details || ""}
         </p>
 
+        <span class="status">
+          ${order.status || "Pending"}
+        </span>
+
       `;
 
-      container.appendChild(card);
+
+      container.appendChild(
+        card
+      );
 
     });
 
@@ -1243,7 +1694,9 @@
   function scrollToOrders() {
 
     document
-      .getElementById("ordersSection")
+      .getElementById(
+        "ordersSection"
+      )
       .scrollIntoView({
         behavior: "smooth"
       });
@@ -1257,7 +1710,10 @@
 
   async function logout() {
 
-    await supabaseClient.auth.signOut();
+    await supabaseClient
+      .auth
+      .signOut();
+
 
     window.location.reload();
 
@@ -1274,18 +1730,27 @@
 
 
   /* =========================
-     CLOSE MODAL ON BACKDROP
+     CLOSE MODAL
   ========================= */
 
   document
-    .getElementById("orderModal")
-    .addEventListener("click", function(e) {
+    .getElementById(
+      "orderModal"
+    )
+    .addEventListener(
+      "click",
+      function(e) {
 
-      if (e.target === this) {
-        closeOrderModal();
+        if (
+          e.target === this
+        ) {
+
+          closeOrderModal();
+
+        }
+
       }
-
-    });
+    );
 
 </script>
 
